@@ -1013,8 +1013,6 @@ p { margin: 0; }
 .netflix-oracle-center { width:50%; text-align:center; }
 .netflix-query-tag { font-size:20px; color:#a0090b; }
 .netflix-oracle-center h3 { font-size:clamp(23px,2.3vw,35px); font-weight:400; margin:16px 0; }
-.netflix-probability-bar { height:15px; width:70%; background:#d9cdb7; margin:20px auto 10px; }
-.netflix-probability-bar span { display:block; height:100%; background:#b9090b; }
 .netflix-oracle-center > p { font-size:19px; line-height:1.45; }
 .netflix-oracle-output { padding:16px 12px; border-top:1px solid #ccc; border-bottom:1px solid #ccc; font-size:27px; margin:25px 0; animation:experiment-content-in 450ms ease both; }
 .netflix-oracle-center .netflix-oracle-caption { font-size:18px; color:#555; }
@@ -1178,3 +1176,9 @@ p { margin: 0; }
 .bridge-slide.active {
   transition: opacity 350ms ease 180ms, transform 450ms cubic-bezier(.22,1,.36,1) 180ms, visibility 0s 180ms;
 }
+
+.netflix-oracle-movie { width:min(17vw,25vh,230px); flex-shrink:0; text-align:center; }
+.netflix-oracle-movie .netflix-cover { width:calc(100% * var(--poster-scale)); margin-inline:auto; }
+.netflix-poster-probability { margin:16px 0 0; color:#a0090b; font-size:clamp(30px,3vw,46px); line-height:1; }
+.netflix-poster-probability span { display:block; margin-top:7px; font-size:clamp(12px,1.1vw,17px); color:#666; }
+@media(max-width:650px) { .netflix-oracle-movie { width:75px; } .netflix-poster-probability { font-size:26px; } }
