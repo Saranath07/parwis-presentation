@@ -1170,3 +1170,11 @@ p { margin: 0; }
 @media(max-width:650px) { .guided-rucb .rucb-recap-line { min-height:36px; }.rucb-single-bound h3 { font-size:18px; }.rucb-single-bound > p { font-size:15px; }.rucb-bound-parts { font-size:13px; gap:5px; }.rucb-bound-parts small { font-size:10px; }.rucb-bound-answer { font-size:22px; }.rucb-single-bound > small { font-size:12px; }.rucb-row-verdict { font-size:13px; }.guided-rucb .rucb-recap-message { font-size:12px; } }
 
 @media(max-width:650px) { .guided-rucb .rucb-recap-line.executing { font-size:16px; padding-top:7px; padding-bottom:7px; } .guided-rucb .rucb-recap-line.executing small { font-size:11px; } }
+
+/* Finish the RUCB exit before revealing the next question. */
+.rucb-recap-slide:not(.active) {
+  transition: opacity 180ms ease, transform 180ms ease, visibility 0s 180ms;
+}
+.bridge-slide.active {
+  transition: opacity 350ms ease 180ms, transform 450ms cubic-bezier(.22,1,.36,1) 180ms, visibility 0s 180ms;
+}

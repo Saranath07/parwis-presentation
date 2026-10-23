@@ -236,10 +236,10 @@ function SetupVisuals({reveal}) {
   </>;
 }
 
-function ModellingSlide({active, step: reveal}) {
+function ModellingSlide({active, step: reveal, bridgeOnly = false}) {
   const step = reveal - 2;
   return (
-    <section className={`modelling-slide slide ${active ? 'active' : ''} ${step >= 7 ? 'bridge-active' : ''} ${step >= 9 ? 'uncertainty-revealed' : ''}`} aria-label="BTL modelling and lecture recap" data-step={step} aria-hidden={!active} inert={!active}>
+    <section className={`modelling-slide slide ${bridgeOnly ? 'bridge-slide' : ''} ${active ? 'active' : ''} ${step >= 7 ? 'bridge-active' : ''} ${step >= 9 ? 'uncertainty-revealed' : ''}`} aria-label="BTL modelling and lecture recap" data-step={step} aria-hidden={!active} inert={!active}>
       <h2 aria-hidden={step >= 7}>{reveal<=2?'Active ranking: the setup':'Modelling noisy comparisons'}</h2>
       <div className={`modelling-stage ${reveal<=2?'formal-setup-stage':''}`}>
         <SetupVisuals reveal={reveal} />
@@ -304,7 +304,8 @@ function App() {
     <main className="presentation">
       <OpeningSlide active={stage === 0} />
       <ProblemSlide active={stage >= 1 && stage <= 3} revealed={stage >= 2} noisy={stage >= 3} />
-      <ModellingSlide active={(stage >= 4 && stage <= 11) || (stage >= 24 && stage <= 27)} step={stage <= 11 ? stage - 4 : stage - 15} />
+      <ModellingSlide active={stage >= 4 && stage <= 11} step={Math.max(0, Math.min(stage - 4, 7))} />
+      <ModellingSlide bridgeOnly active={stage >= 24 && stage <= 27} step={Math.max(9, Math.min(stage - 15, 12))} />
       <RucbRecapSlide active={stage >= 12 && stage <= 23} step={stage - 12} />
       <StoryTimeSlide active={stage >= 28 && stage <= 32} step={stage - 28} />
       <LastComparisonSlide active={stage >= 33 && stage <= 36} step={stage - 33} />
