@@ -5,7 +5,7 @@ function MathLine({tex, className = ''}) {
   return <div className={`story-math ${className}`} dangerouslySetInnerHTML={{__html:katex.renderToString(tex,{displayMode:true,throwOnError:true,strict:'error'})}} />;
 }
 function DoodlePerson({color, side, talking, agreed}) {
-  return <svg className={`doodle-person ${talking ? 'talking' : ''}`} viewBox="0 0 220 250" role="img" aria-label={side === 'left' ? 'Teammate advocating bandits' : 'Me advocating active ranking'}>
+  return <svg className={`doodle-person ${talking ? 'talking' : ''}`} viewBox="0 0 220 250" role="img" aria-label={side === 'left' ? 'Srividhya advocating bandits' : 'Me advocating active ranking'}>
     <path d="M70 158 Q110 138 150 158 L163 237 H57 Z" fill={color} stroke="#000" strokeWidth="2.5" />
     <path d={agreed ? 'M72 169 L38 127 L27 136 M148 169 L182 127 L193 136' : side === 'left' ? 'M72 169 L40 193 L25 172 M148 169 L185 146 L194 156' : 'M72 169 L40 146 L26 157 M148 169 L180 193 L195 172'} fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" />
     <g className="doodle-head">
@@ -29,7 +29,7 @@ export function StoryTimeSlide({active, step}) {
       <div className="comic-person">
         <Show visible={step >= 1 && step < 3} className="speech-bubble">“Let’s do bandits.”</Show>
         <DoodlePerson side="left" color="#3276b1" talking={active && step === 1} agreed={step >= 3} />
-        <span className="comic-label">Teammate</span>
+        <span className="comic-label">Srividhya</span>
       </div>
       <div className="comic-person">
         <Show visible={step >= 2 && step < 3} className="speech-bubble">“Let’s do active ranking.”</Show>
