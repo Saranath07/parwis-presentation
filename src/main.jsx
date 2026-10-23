@@ -9,10 +9,12 @@ import {ChessSelectionSlide} from './ChessSelectionSlide.jsx';
 import {AlgorithmSlide} from './AlgorithmSlide.jsx';
 import {DisruptionMeasuresSlide} from './DisruptionMeasuresSlide.jsx';
 import {ExperimentsSlide} from './ExperimentsSlide.jsx';
+import {NetflixSlide} from './NetflixSlide.jsx';
 import {walkthroughFrames} from './parwisWalkthrough.js';
 const MEASURES_START = 33 + walkthroughFrames.length;
 const EXPERIMENTS_START = MEASURES_START + 4;
-const LAST_STAGE = EXPERIMENTS_START + 4;
+const NETFLIX_START = EXPERIMENTS_START + 1;
+const LAST_STAGE = NETFLIX_START + 4;
 
 function OpeningSlide({active}) {
 
@@ -307,7 +309,8 @@ function App() {
       <ChessSelectionSlide active={stage >= 29 && stage <= 32} step={stage - 29} />
       <AlgorithmSlide active={stage >= 33 && stage < MEASURES_START} step={stage - 33} />
       <DisruptionMeasuresSlide active={stage >= MEASURES_START && stage < EXPERIMENTS_START} step={stage - MEASURES_START} />
-      <ExperimentsSlide active={stage >= EXPERIMENTS_START && stage < LAST_STAGE} step={stage - EXPERIMENTS_START} />
+      <ExperimentsSlide active={stage === EXPERIMENTS_START} step={0} />
+      <NetflixSlide active={stage >= NETFLIX_START && stage < LAST_STAGE} step={stage - NETFLIX_START} />
       <section className={`slide questions-slide ${stage === LAST_STAGE ? 'active' : ''}`} aria-label="Questions" aria-hidden={stage !== LAST_STAGE} inert={stage !== LAST_STAGE}>
         <h2>Questions?</h2>
         <p className="questions-presenters">Saranath P &amp; Srividhya Sethuraman</p>

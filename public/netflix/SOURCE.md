@@ -1,0 +1,9 @@
+# Netflix classroom sequence
+
+- Historical Netflix wordmark (2001–2014): https://commons.wikimedia.org/wiki/File:Netflix_logo.svg ; downloaded original https://upload.wikimedia.org/wikipedia/commons/6/69/Netflix_logo.svg . Netflix trademark; Commons labels the text logo PD-textlogo.
+- Original movie-cover illustrations generated for this presentation. The four depicted films are Nayakan, Padayappa, Anbe Sivam, and Ghilli; these teaching examples are not asserted to be records in the Netflix Prize top-100 subset.
+- Dataset structure: Netflix-provided README mirrored at https://www.kaggle.com/datasets/netflix-inc/netflix-prize-data ; movie-specific files contain CustomerID,Rating,Date records, ratings 1–5. The example users and ratings are synthetic.
+- Pipeline checked against PARWiS §V-E and https://github.com/DevSheth/active-ranking-under-shoe-string-budget/blob/master/datasets/netflix.py : top 100 by rating count; average paired-user rating differences; logistic pairwise probabilities; spectral ranking; normalized scores.
+- Demo model: complete illustrative rating matrix; its consistent mean-difference probabilities have BTL weights proportional to exp(mean rating). These are global BTL scores, not an empirical fit to the real Netflix dataset.
+- Oracle: actual Bernoulli draws using the illustrative fitted BTL probability; it is a teaching animation, not a replication of the paper’s experiments.
+- Two-series recovery chart: approximate means digitized from the original Figure 3 Netflix panel at public/experiments/baselines-netflix-recovery.png. Budgets 100,200,300,400,500,600,700; PARWiS ≈ 4.8,8.8,12.3,12.8,15.2,15.2,17.0%; RUCB ≈ 3.0,3.7,4.0,4.4,5.4,5.8,6.8%. Read from colored mean-line pixels at the budget markers (rather than vertical error bars), with axis ticks calibrated to percentage values. Not raw authors’ data. Error bars are not reconstructed; the UI exposes the original unmodified plot.
