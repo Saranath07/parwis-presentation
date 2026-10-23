@@ -39,7 +39,6 @@ export function AlgorithmSlide({active,step}){
             const playing=frame.pair?.length===2&&involved;
             const x=playing?(frame.pair[0]===index?120:440):(index%2===0?120:440),y=playing?210:(index<2?90:330);
             return <g key={player.name} style={{transform:`translate(${x}px,${y}px)`}} className={`parwis-live-player ${frame.pair&&!involved?'waiting':''} ${involved?'in-match':''}`}>
-              <ellipse cx="0" cy="61" rx="69" ry="87" fill={won?'#f3f8f3':'none'} stroke={involved?player.color:'none'} strokeWidth="2" />
               <SeatedPlayer color={player.color} facingLeft={playing?frame.pair[1]===index:index%2===1} portrait={index} pleased={won} />
               <text x="0" y="151" textAnchor="middle" fontSize="23">{player.name}</text>
               <text x="0" y="180" textAnchor="middle" fontSize="27" fill={player.color}>{frame.ratings[index]}</text>
