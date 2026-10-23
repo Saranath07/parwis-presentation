@@ -276,7 +276,7 @@ function App() {
 
   useEffect(() => {
     async function handleKeyDown(event) {
-      if (event.repeat || event.ctrlKey || event.metaKey || event.altKey ||
+      if (event.ctrlKey || event.metaKey || event.altKey ||
           event.target.isContentEditable ||
           /^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName)) return;
 
@@ -286,7 +286,7 @@ function App() {
       } else if (event.key === 'ArrowLeft') {
         event.preventDefault();
         setStage(value => Math.max(0, value - 1));
-      } else if (event.key.toLowerCase() === 'f') {
+      } else if (event.key.toLowerCase() === 'f' && !event.repeat) {
         event.preventDefault();
         try {
           if (document.fullscreenElement) await document.exitFullscreen();
