@@ -14,7 +14,8 @@ import {walkthroughFrames} from './parwisWalkthrough.js';
 const MEASURES_START = 33 + walkthroughFrames.length;
 const EXPERIMENTS_START = MEASURES_START + 4;
 const NETFLIX_START = EXPERIMENTS_START + 1;
-const LAST_STAGE = NETFLIX_START + 6;
+const RESULTS_START = NETFLIX_START + 6;
+const LAST_STAGE = RESULTS_START + 3;
 
 function OpeningSlide({active}) {
 
@@ -309,8 +310,8 @@ function App() {
       <ChessSelectionSlide active={stage >= 29 && stage <= 32} step={stage - 29} />
       <AlgorithmSlide active={stage >= 33 && stage < MEASURES_START} step={stage - 33} />
       <DisruptionMeasuresSlide active={stage >= MEASURES_START && stage < EXPERIMENTS_START} step={stage - MEASURES_START} />
-      <ExperimentsSlide active={stage === EXPERIMENTS_START} step={0} />
-      <NetflixSlide active={stage >= NETFLIX_START && stage < LAST_STAGE} step={stage - NETFLIX_START} />
+      <ExperimentsSlide active={stage === EXPERIMENTS_START || (stage >= RESULTS_START && stage < LAST_STAGE)} step={stage === EXPERIMENTS_START ? 0 : stage - RESULTS_START + 1} />
+      <NetflixSlide active={stage >= NETFLIX_START && stage < RESULTS_START} step={stage - NETFLIX_START} />
       <section className={`slide questions-slide ${stage === LAST_STAGE ? 'active' : ''}`} aria-label="Questions" aria-hidden={stage !== LAST_STAGE} inert={stage !== LAST_STAGE}>
         <h2>Questions?</h2>
         <p className="questions-presenters">Saranath P &amp; Srividhya Sethuraman</p>
