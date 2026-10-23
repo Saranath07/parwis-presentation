@@ -1098,3 +1098,9 @@ p { margin: 0; }
  .staged-model-flow .model-fit-panel { width:42%; }.staged-model-flow .model-fit-panel h3 { font-size:19px; }.staged-model-flow .model-fit-panel .netflix-equation { font-size:13px; }
 }
 @media(prefers-reduced-motion:reduce) { .model-fit-panel.model-panel-visible .netflix-score-bars i { animation:none; } }
+
+.staged-model-flow .netflix-rating-definition .netflix-equation { font-size:clamp(16px,1.45vw,23px); }
+.netflix-rating-definition .katex-display { margin:.35em 0; }
+.staged-model-flow .model-parked-left .netflix-rating-definition .netflix-equation { font-size:clamp(10px,.88vw,14px); }
+.staged-model-flow .model-rating-panel .netflix-rating-example { font-size:clamp(15px,1.4vw,22px); margin-top:14px; }
+.staged-model-flow .model-parked-left .netflix-rating-example { font-size:clamp(12px,1vw,16px); }
