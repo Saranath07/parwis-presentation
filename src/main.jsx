@@ -209,7 +209,7 @@ function SetupVisuals({reveal}) {
     <div className={`formal-setup-items ${reveal>=1?'setup-parked-left':''} ${reveal>=3?'setup-dismissed':''}`} aria-hidden={reveal>=3}>
       <h3>N items</h3>
       <svg viewBox="0 0 440 250" role="img" aria-label="A collection of N items with unknown strengths">
-        {itemColors.map((color,index)=><g key={color} className="setup-item-arrival" style={{animationDelay:`${index*110}ms`}}><Player x={65+index*102} y={70} color={color}/></g>)}
+        {Array.from({length:10},(_,index)=><g key={index} transform={`translate(${55+(index%5)*82} ${45+Math.floor(index/5)*110})`}><g className="setup-item-arrival" style={{animationDelay:`${index*60}ms`}}><g transform="scale(.45)"><Player x={0} y={0} color={itemColors[index%itemColors.length]}/></g></g></g>)}
         <text x="220" y="240" textAnchor="middle" fontSize="32">…</text>
       </svg>
       <Equation tex={String.raw`\mathcal I=\{1,\ldots,N\}`} />
