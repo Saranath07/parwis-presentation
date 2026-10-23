@@ -205,11 +205,12 @@ function BTLAnimation({playing}) {
 }
 
 function SetupVisuals({reveal}) {
+  const setupColors=['#3276b1','#c75a59','#35956b','#8862ae','#db7d25','#159ca6','#ca5790','#b29a20','#526273','#875138'];
   return <>
     <div className={`formal-setup-items ${reveal>=1?'setup-parked-left':''} ${reveal>=3?'setup-dismissed':''}`} aria-hidden={reveal>=3}>
       <h3>N items</h3>
       <svg viewBox="0 0 440 250" role="img" aria-label="A collection of N items with unknown strengths">
-        {Array.from({length:10},(_,index)=><g key={index} transform={`translate(${55+(index%5)*82} ${45+Math.floor(index/5)*110})`}><g className="setup-item-arrival" style={{animationDelay:`${index*60}ms`}}><g transform="scale(.45)"><Player x={0} y={0} color={itemColors[index%itemColors.length]}/></g></g></g>)}
+        {setupColors.map((color,index)=><g key={color} transform={`translate(${55+(index%5)*82} ${45+Math.floor(index/5)*110})`}><g className="setup-item-arrival" style={{animationDelay:`${index*60}ms`}}><g transform="scale(.45)"><Player x={0} y={0} color={color}/></g></g></g>)}
         <text x="220" y="240" textAnchor="middle" fontSize="32">…</text>
       </svg>
       <Equation tex={String.raw`\mathcal I=\{1,\ldots,N\}`} />
