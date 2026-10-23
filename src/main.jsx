@@ -10,7 +10,7 @@ import {AlgorithmSlide} from './AlgorithmSlide.jsx';
 import {DisruptionMeasuresSlide} from './DisruptionMeasuresSlide.jsx';
 import {ExperimentsSlide} from './ExperimentsSlide.jsx';
 import {walkthroughFrames} from './parwisWalkthrough.js';
-const MEASURES_START = 31 + walkthroughFrames.length;
+const MEASURES_START = 33 + walkthroughFrames.length;
 const EXPERIMENTS_START = MEASURES_START + 4;
 const LAST_STAGE = EXPERIMENTS_START + 4;
 
@@ -204,14 +204,43 @@ function BTLAnimation({playing}) {
   );
 }
 
-function ModellingSlide({active, step}) {
+function SetupVisuals({reveal}) {
+  return <>
+    <div className={`formal-setup-items ${reveal>=1?'setup-parked-left':''} ${reveal>=3?'setup-dismissed':''}`} aria-hidden={reveal>=3}>
+      <h3>N items</h3>
+      <svg viewBox="0 0 440 250" role="img" aria-label="A collection of N items with unknown strengths">
+        {itemColors.map((color,index)=><g key={color} className="setup-item-arrival" style={{animationDelay:`${index*110}ms`}}><Player x={65+index*102} y={70} color={color}/></g>)}
+        <text x="220" y="240" textAnchor="middle" fontSize="32">…</text>
+      </svg>
+      <Equation tex={String.raw`\mathcal I=\{1,\ldots,N\}`} />
+      <p>Unknown strengths <span className="setup-inline-math">wᵢ &gt; 0</span></p>
+    </div>
+    <div className={`formal-setup-budget ${reveal>=1?'setup-visible':''} ${reveal>=2?'setup-parked-right':''} ${reveal>=3?'setup-dismissed':''}`} aria-hidden={reveal<1||reveal>=3}>
+      <h3>A budget of B games</h3>
+      <svg viewBox="0 0 440 250" role="img" aria-label="B comparison tokens; one token pays for one game between a chosen pair">
+        {[0,1,2,3,4].map(i=><g key={i} className="setup-budget-token" style={{animationDelay:`${i*120}ms`}}>
+          <rect x={30+i*76} y="50" width="66" height="90" rx="9" fill={i%2?'#eee':'#fff'} stroke="#111" strokeWidth="2"/>
+          <circle cx={63+i*76} cy="79" r="8" fill="#111"/><path d={`M${57+i*76} 90 L${53+i*76} 109 H${73+i*76} L${69+i*76} 90 Z M${50+i*76} 110 H${76+i*76} V117 H${50+i*76} Z`} fill="#111"/>
+        </g>)}
+        <path d="M40 157 V168 H400 V157" fill="none" stroke="#999" strokeWidth="2"/>
+        <text x="220" y="205" textAnchor="middle" fontSize="34">B tokens</text>
+      </svg>
+      <Equation tex={String.raw`1\text{ game}=1\text{ pairwise comparison}`} />
+      <p>Choose the pair. Spend one token.</p>
+    </div>
+  </>;
+}
+
+function ModellingSlide({active, step: reveal}) {
+  const step = reveal - 2;
   return (
     <section className={`modelling-slide slide ${active ? 'active' : ''} ${step >= 7 ? 'bridge-active' : ''} ${step >= 9 ? 'uncertainty-revealed' : ''}`} aria-label="BTL modelling and lecture recap" data-step={step} aria-hidden={!active} inert={!active}>
-      <h2 aria-hidden={step >= 7}>Modelling noisy comparisons</h2>
-      <div className="modelling-stage">
-        <div className={`btl-block ${step >= 1 ? 'at-top' : ''}`} aria-hidden={step >= 7}>
+      <h2 aria-hidden={step >= 7}>{reveal<=2?'Active ranking: the setup':'Modelling noisy comparisons'}</h2>
+      <div className={`modelling-stage ${reveal<=2?'formal-setup-stage':''}`}>
+        <SetupVisuals reveal={reveal} />
+        <div className={`btl-block ${reveal<2?'setup-btl-hidden':''} ${step >= 1 ? 'at-top' : ''}`} aria-hidden={reveal<2||step >= 7}>
           <h3>BTL assumption</h3>
-          <Equation tex={String.raw`p_{ij}=\Pr(i\succ j)=\frac{w_i}{w_i+w_j},\qquad w_i>0`} />
+          <Equation tex={String.raw`p_{ij}=\Pr(i\succ j)=\frac{w_i}{w_i+w_j}`} />
           <div className={`btl-animation-wrapper ${step >= 1 ? 'disappeared' : ''}`} aria-hidden={step >= 1}>
             <BTLAnimation playing={active && step === 0} />
           </div>
@@ -270,12 +299,12 @@ function App() {
     <main className="presentation">
       <OpeningSlide active={stage === 0} />
       <ProblemSlide active={stage >= 1 && stage <= 3} revealed={stage >= 2} noisy={stage >= 3} />
-      <ModellingSlide active={stage >= 4 && stage <= 14} step={stage - 4} />
-      <StoryTimeSlide active={stage >= 15 && stage <= 19} step={stage - 15} />
-      <LastComparisonSlide active={stage >= 20 && stage <= 23} step={stage - 20} />
-      <BothOutcomesSlide active={stage >= 24 && stage <= 26} step={stage - 24} />
-      <ChessSelectionSlide active={stage >= 27 && stage <= 30} step={stage - 27} />
-      <AlgorithmSlide active={stage >= 31 && stage < MEASURES_START} step={stage - 31} />
+      <ModellingSlide active={stage >= 4 && stage <= 16} step={stage - 4} />
+      <StoryTimeSlide active={stage >= 17 && stage <= 21} step={stage - 17} />
+      <LastComparisonSlide active={stage >= 22 && stage <= 25} step={stage - 22} />
+      <BothOutcomesSlide active={stage >= 26 && stage <= 28} step={stage - 26} />
+      <ChessSelectionSlide active={stage >= 29 && stage <= 32} step={stage - 29} />
+      <AlgorithmSlide active={stage >= 33 && stage < MEASURES_START} step={stage - 33} />
       <DisruptionMeasuresSlide active={stage >= MEASURES_START && stage < EXPERIMENTS_START} step={stage - MEASURES_START} />
       <ExperimentsSlide active={stage >= EXPERIMENTS_START && stage < LAST_STAGE} step={stage - EXPERIMENTS_START} />
       <section className={`slide questions-slide ${stage === LAST_STAGE ? 'active' : ''}`} aria-label="Questions" aria-hidden={stage !== LAST_STAGE} inert={stage !== LAST_STAGE}>
