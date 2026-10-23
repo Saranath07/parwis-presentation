@@ -55,16 +55,16 @@ export function LastComparisonSlide({active, step}) {
       <div className="challenger-option">
         <div className="comparison-connector" aria-hidden="true" />
         <h3>A familiar paper</h3>
-        <div className="mini-paper-stack" aria-hidden="true"><span /><span /><span /><b>Again?</b></div>
-        <p>We’ve debated this one repeatedly.</p>
-        <Show visible={step >= 1}><span className="challenger-thought">“Same discussion. Same conclusion?”</span></Show>
+        <img className="challenger-paper-preview" src={`${import.meta.env.BASE_URL}papers/wisdom-first-page.png`} alt="First page of WiSDoM: Frugal Winner Selection by Design of Matchups"/>
+        <p className="challenger-paper-title">WiSDoM</p>
+        <Show visible={step >= 1} className="challenger-paper-details"><p>Saranath P · Arun Rajkumar</p><p>Uncertainty in Data Mining Workshop<br/>KDD 2026</p></Show>
       </div>
       <div className="challenger-option">
         <div className="comparison-connector" aria-hidden="true" />
         <h3>An overlooked paper</h3>
-        <div className="overlooked-paper" aria-hidden="true"><span>?</span></div>
-        <p>Could this change our assessment?</p>
-        <Show visible={step >= 1}><span className="challenger-thought">“Wait… did we miss something?”</span></Show>
+        <img className="challenger-paper-preview" src={`${import.meta.env.BASE_URL}papers/just-sort-it-first-page.png`} alt="First page of Just Sort It! A Simple and Effective Approach to Active Preference Learning"/>
+        <p className="challenger-paper-title" title="A Simple and Effective Approach to Active Preference Learning">Just Sort It!</p>
+        <Show visible={step >= 1} className="challenger-paper-details"><p>Lucas Maystre · Matthias Grossglauser</p><p><a href="https://proceedings.mlr.press/v70/maystre17a.html" target="_blank" rel="noreferrer">ICML 2017</a></p></Show>
       </div>
     </div>
     <Show visible={step >= 2} className="challenger-question">Which comparison could shake our judgement the most?</Show>
