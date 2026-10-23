@@ -1106,3 +1106,32 @@ p { margin: 0; }
 .staged-model-flow .model-parked-left .netflix-rating-example { font-size:clamp(12px,1vw,16px); }
 
 .presentation-page-number { position:absolute; bottom:18px; left:20px; z-index:10; color:#777; font-size:16px; font-variant-numeric:tabular-nums; pointer-events:none; }
+
+.rucb-recap-slide { padding:4vh 4vw 110px; }
+.rucb-recap-layout { display:grid; grid-template-columns:55% 45%; gap:2%; width:100%; flex:1; min-height:0; margin-top:20px; align-items:center; }
+.rucb-recap-code { font-size:clamp(17px,1.55vw,24px); }
+.rucb-recap-line { position:relative; padding:9px 10px 9px 34px; line-height:1.4; border-left:3px solid transparent; }
+.rucb-recap-line.executing { background:#eee; border-color:#111; }
+.rucb-line-number { position:absolute; left:8px; color:#888; font-size:.8em; }
+.rucb-recap-line small { display:block; font-size:.74em; color:#555; line-height:1.5; margin-top:4px; }
+.rucb-recap-example { text-align:center; min-width:0; }
+.rucb-matrix-heading { font-size:clamp(20px,1.7vw,27px); margin-bottom:13px; }
+.rucb-upper-table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:clamp(19px,1.7vw,27px); }
+.rucb-upper-table th,.rucb-upper-table td { padding:9px; border-bottom:1px solid #ddd; font-weight:400; transition:background 500ms,color 500ms; }
+.rucb-upper-table thead th { border-bottom:1px solid #000; }
+.rucb-upper-table .candidate-row > th { font-weight:700; }
+.rucb-upper-table .champion-column { background:#f1f1f1; }
+.rucb-upper-table .chosen-upper { background:#e4d8ef; font-weight:700; outline:1px solid #8862ae; }
+.rucb-upper-table .ruled-out { color:#aaa; }
+.rucb-candidate-summary { font-size:20px; margin:15px 0 0; }
+.rucb-four-arms { display:block; width:100%; max-height:130px; }
+.rucb-recap-message { font-size:clamp(17px,1.45vw,23px); min-height:65px; line-height:1.35; }
+.rucb-comparison-count { font-size:18px; margin-top:8px; }
+.rucb-better-line { position:absolute; bottom:12%; left:5%; right:5%; text-align:center; font-size:clamp(25px,2.5vw,38px); opacity:0; transform:translateY(10px); transition:opacity 600ms,transform 700ms; }
+.rucb-better-line.visible { opacity:1; transform:translateY(0); }
+.rucb-recap-source { position:absolute; bottom:20px; left:6%; right:10%; text-align:center; color:#555; font-size:clamp(11px,.92vw,14px); line-height:1.5; }
+.rucb-recap-source a { color:inherit; }
+@media(max-height:760px) and (min-width:651px) {
+ .rucb-recap-slide > h2 { font-size:31px; }.rucb-recap-layout { margin-top:10px; }.rucb-recap-code { font-size:18px; }.rucb-recap-line { padding-top:5px; padding-bottom:5px; }.rucb-four-arms { max-height:100px; }.rucb-upper-table th,.rucb-upper-table td { padding:6px; }.rucb-better-line { bottom:11%; }
+}
+@media(max-width:650px) { .rucb-recap-code { font-size:11px; }.rucb-recap-line { padding-left:18px; }.rucb-line-number { left:3px; }.rucb-matrix-heading { font-size:13px; }.rucb-upper-table { font-size:12px; }.rucb-upper-table th,.rucb-upper-table td { padding:3px; }.rucb-candidate-summary,.rucb-recap-message,.rucb-comparison-count { font-size:12px; }.rucb-better-line { font-size:20px; }.rucb-recap-source { font-size:8px; } }

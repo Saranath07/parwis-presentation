@@ -10,8 +10,9 @@ import {AlgorithmSlide} from './AlgorithmSlide.jsx';
 import {DisruptionMeasuresSlide} from './DisruptionMeasuresSlide.jsx';
 import {ExperimentsSlide} from './ExperimentsSlide.jsx';
 import {NetflixSlide} from './NetflixSlide.jsx';
+import {RucbRecapSlide} from './RucbRecapSlide.jsx';
 import {walkthroughFrames} from './parwisWalkthrough.js';
-const MEASURES_START = 33 + walkthroughFrames.length;
+const MEASURES_START = 39 + walkthroughFrames.length;
 const EXPERIMENTS_START = MEASURES_START + 4;
 const NETFLIX_START = EXPERIMENTS_START + 1;
 const RESULTS_START = NETFLIX_START + 6;
@@ -256,8 +257,7 @@ function ModellingSlide({active, step: reveal}) {
         <div className={`algorithm-panel duelling-panel ${step >= 4 ? 'visible' : ''} ${step >= 5 ? 'parked-right' : ''}`} aria-hidden={step < 4 || step >= 7}>
           <DuellingVisual playing={active && step >= 4} />
         </div>
-        <div className={`better-claim ${step >= 6 ? 'visible' : ''}`} aria-hidden={step < 6}>
-          <p className="claim-original" aria-hidden={step >= 7}>We will see an algorithm that does <strong>better</strong> than RUCB.</p>
+        <div className={`better-claim ${step >= 7 ? 'visible' : ''}`} aria-hidden={step < 7}>
           <p className="claim-reframed" aria-hidden={step < 7}>What do we mean by “<strong>better</strong>”?</p>
         </div>
         <p className={`recovery-question bridge-text ${step >= 8 ? 'visible' : ''}`} aria-hidden={step < 8}>Can we identify the winner with fewer comparisons?</p>
@@ -270,7 +270,7 @@ function ModellingSlide({active, step: reveal}) {
 
 function App() {
   const [stage, setStage] = useState(0);
-  const slideNumber = stage === 0 ? 1 : stage <= 3 ? 2 : stage <= 16 ? 3 : stage <= 21 ? 4 : stage <= 25 ? 5 : stage <= 28 ? 6 : stage <= 32 ? 7 : stage < MEASURES_START ? 8 : stage < EXPERIMENTS_START ? 9 : stage < NETFLIX_START ? 10 : stage < RESULTS_START ? 11 : stage < LAST_STAGE ? 12 : 13;
+  const slideNumber = stage === 0 ? 1 : stage <= 3 ? 2 : stage <= 11 ? 3 : stage <= 18 ? 4 : stage <= 22 ? 5 : stage <= 27 ? 6 : stage <= 31 ? 7 : stage <= 34 ? 8 : stage <= 38 ? 9 : stage < MEASURES_START ? 10 : stage < EXPERIMENTS_START ? 11 : stage < NETFLIX_START ? 12 : stage < RESULTS_START ? 13 : stage < LAST_STAGE ? 14 : 15;
   const next = () => setStage(value => Math.min(LAST_STAGE, value + 1));
   const previous = () => setStage(value => Math.max(0, value - 1));
 
@@ -304,12 +304,13 @@ function App() {
     <main className="presentation">
       <OpeningSlide active={stage === 0} />
       <ProblemSlide active={stage >= 1 && stage <= 3} revealed={stage >= 2} noisy={stage >= 3} />
-      <ModellingSlide active={stage >= 4 && stage <= 16} step={stage - 4} />
-      <StoryTimeSlide active={stage >= 17 && stage <= 21} step={stage - 17} />
-      <LastComparisonSlide active={stage >= 22 && stage <= 25} step={stage - 22} />
-      <BothOutcomesSlide active={stage >= 26 && stage <= 28} step={stage - 26} />
-      <ChessSelectionSlide active={stage >= 29 && stage <= 32} step={stage - 29} />
-      <AlgorithmSlide active={stage >= 33 && stage < MEASURES_START} step={stage - 33} />
+      <ModellingSlide active={(stage >= 4 && stage <= 11) || (stage >= 19 && stage <= 22)} step={stage <= 11 ? stage - 4 : stage - 10} />
+      <RucbRecapSlide active={stage >= 12 && stage <= 18} step={stage - 12} />
+      <StoryTimeSlide active={stage >= 23 && stage <= 27} step={stage - 23} />
+      <LastComparisonSlide active={stage >= 28 && stage <= 31} step={stage - 28} />
+      <BothOutcomesSlide active={stage >= 32 && stage <= 34} step={stage - 32} />
+      <ChessSelectionSlide active={stage >= 35 && stage <= 38} step={stage - 35} />
+      <AlgorithmSlide active={stage >= 39 && stage < MEASURES_START} step={stage - 39} />
       <DisruptionMeasuresSlide active={stage >= MEASURES_START && stage < EXPERIMENTS_START} step={stage - MEASURES_START} />
       <ExperimentsSlide active={stage === EXPERIMENTS_START || (stage >= RESULTS_START && stage < LAST_STAGE)} step={stage === EXPERIMENTS_START ? 0 : stage - RESULTS_START + 1} />
       <NetflixSlide active={stage >= NETFLIX_START && stage < RESULTS_START} step={stage - NETFLIX_START} />
@@ -318,7 +319,7 @@ function App() {
         <p className="questions-presenters">Saranath P &amp; Srividhya Sethuraman</p>
         <p className="questions-paper">PARWiS · ICDM 2021</p>
       </section>
-      <div className="presentation-page-number" aria-label={`Slide ${slideNumber} of 13`}>{slideNumber} / 13</div>
+      <div className="presentation-page-number" aria-label={`Slide ${slideNumber} of 15`}>{slideNumber} / 15</div>
       <nav className="slide-controls" aria-label="Presentation navigation">
         <button onClick={previous} disabled={stage === 0} aria-label="Previous reveal or slide">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12 H5 M11 6 L5 12 L11 18" /></svg>
