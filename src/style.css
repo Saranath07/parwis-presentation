@@ -1136,10 +1136,10 @@ p { margin: 0; }
 }
 @media(max-width:650px) { .rucb-recap-code { font-size:11px; }.rucb-recap-line { padding-left:18px; }.rucb-line-number { left:3px; }.rucb-matrix-heading { font-size:13px; }.rucb-upper-table { font-size:12px; }.rucb-upper-table th,.rucb-upper-table td { padding:3px; }.rucb-candidate-summary,.rucb-recap-message,.rucb-comparison-count { font-size:12px; }.rucb-better-line { font-size:20px; }.rucb-recap-source { font-size:8px; } }
 
-.guided-rucb .rucb-recap-line { opacity:.18; transition:opacity 500ms,background 500ms; min-height:52px; }
-.guided-rucb .rucb-recap-line.executing { opacity:1; }
+.guided-rucb .rucb-recap-line { opacity:.18; transition:opacity 500ms,background 500ms,font-size 600ms,padding 600ms; min-height:52px; }
+.guided-rucb .rucb-recap-line.executing { opacity:1; font-size:clamp(26px,2.35vw,35px); padding-top:13px; padding-bottom:13px; }
 .guided-rucb .rucb-recap-line small { display:none; }
-.guided-rucb .rucb-recap-line.executing small { display:block; }
+.guided-rucb .rucb-recap-line.executing small { display:block; font-size:clamp(16px,1.3vw,20px); }
 .guided-rucb .rucb-recap-example { min-height:400px; display:flex; flex-direction:column; justify-content:center; }
 .rucb-example-intro { font-size:30px; }
 .rucb-example-intro > p { font-size:21px; margin-bottom:30px; }
@@ -1168,3 +1168,5 @@ p { margin: 0; }
  .guided-rucb .rucb-comparison-count { font-size:16px; margin-top:5px; }
 }
 @media(max-width:650px) { .guided-rucb .rucb-recap-line { min-height:36px; }.rucb-single-bound h3 { font-size:18px; }.rucb-single-bound > p { font-size:15px; }.rucb-bound-parts { font-size:13px; gap:5px; }.rucb-bound-parts small { font-size:10px; }.rucb-bound-answer { font-size:22px; }.rucb-single-bound > small { font-size:12px; }.rucb-row-verdict { font-size:13px; }.guided-rucb .rucb-recap-message { font-size:12px; } }
+
+@media(max-width:650px) { .guided-rucb .rucb-recap-line.executing { font-size:16px; padding-top:7px; padding-bottom:7px; } .guided-rucb .rucb-recap-line.executing small { font-size:11px; } }

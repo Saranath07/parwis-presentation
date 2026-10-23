@@ -43,11 +43,11 @@ export function RucbRecapSlide({active,step}){
  const activeLine=phase===0?0:phase<=2?1:phase<=6?2:phase===7?3:phase===8?4:phase<=10?5:6;
  const testRow=phase>=3&&phase<=6?phase-3:-1;
  const rows=[
-  <><MathLine tex={String.raw`W\gets0,\quad\mathcal H\gets\varnothing`}/><small>Wᵢⱼ counts wins of i over j; H remembers a champion.</small></>,
+  <><MathLine tex={String.raw`W\gets0,\quad\mathcal H\gets\varnothing`}/><small><MathLine tex="W_{ij}"/> counts wins of <MathLine tex="i"/> over <MathLine tex="j"/>; <MathLine tex={String.raw`\mathcal H`}/> remembers a champion.</small></>,
   <><MathLine tex={String.raw`U_{ij}\gets\frac{W_{ij}}{N_{ij}}+\sqrt{\frac{\alpha\log t}{N_{ij}}}`}/><small><MathLine tex={String.raw`N_{ij}=W_{ij}+W_{ji},\quad U_{ii}=\tfrac12`}/></small></>,
   <><MathLine tex={String.raw`\mathcal C\gets\{i:\ U_{ij}\ge\tfrac12\ \forall j\}`}/><small><MathLine tex={String.raw`\mathcal H\gets\mathcal H\cap\mathcal C`}/> · Keep only plausible champions.</small></>,
-  <>Choose champion <MathLine tex="c"/> from <MathLine tex={String.raw`\mathcal C,\mathcal H`}/><small>Empty C: choose uniformly from all arms.<br/>Singleton C: choose it; H ← C.<br/>Otherwise: H gets ½; share the rest uniformly.<br/>Empty H: uniform over C.</small></>,
-  <><MathLine tex={String.raw`d\gets\arg\max_j U_{jc}`}/><small>Use the champion’s column. Random ties; exclude c from a tie.</small></>,
+  <>Choose champion <MathLine tex="c"/> from <MathLine tex={String.raw`\mathcal C,\mathcal H`}/><small>Empty <MathLine tex={String.raw`\mathcal C`}/>: choose uniformly from all arms.<br/>Singleton <MathLine tex={String.raw`\mathcal C`}/>: choose it; <MathLine tex={String.raw`\mathcal H\gets\mathcal C`}/>. <br/>Otherwise: <MathLine tex={String.raw`\mathcal H`}/> gets <MathLine tex={String.raw`\tfrac12`}/>; share the rest uniformly.<br/>Empty <MathLine tex={String.raw`\mathcal H`}/>: uniform over <MathLine tex={String.raw`\mathcal C`}/>.</small></>,
+  <><MathLine tex={String.raw`d\gets\arg\max_j U_{jc}`}/><small>Use the champion’s column. Random ties; exclude <MathLine tex="c"/> from a tie.</small></>,
   <>Compare <MathLine tex="(c,d)"/> and update <MathLine tex="W"/>.</>,
   <>Repeat until <MathLine tex="T"/>; report the empirical winner.<small>The arm beating the most opponents in the observed win fractions.</small></>,
  ];
@@ -61,8 +61,8 @@ export function RucbRecapSlide({active,step}){
      <div className="rucb-bound-parts"><span><small>Observed win fraction</small><MathLine tex={String.raw`\frac{W_{DB}}{N_{DB}}=\frac14=0.25`}/></span><span>+</span><span><small>Uncertainty bonus</small><MathLine tex={String.raw`\sqrt{\frac{\log245}{4}}\approx1.17`}/></span></div>
      <div className="rucb-bound-answer"><MathLine tex={String.raw`U_{DB}\approx1.42`}/></div><small>Few comparisons → a large bonus. A bound may exceed 1.</small>
     </div>:<>
-     <div className="rucb-matrix-heading">Computed U · t = {round+(updated?1:0)} · α = 1</div>
-     <table className="rucb-upper-table" aria-label="U matrix: row i beats column j"><thead><tr><th>i ↓ · j →</th>{[...letters].map((c,j)=><th key={c} className={phase>=7&&j===champion?'champion-column':''}>{c}</th>)}</tr></thead><tbody>{table.map((row,i)=><tr key={i} className={`${testRow===i?'testing-row':''} ${testRow>=0&&testRow!==i?'untested-row':''}`}><th style={{color:colors[i]}}>{letters[i]}</th>{row.map((u,j)=><td key={j} className={`${phase>=7&&j===champion?'champion-column':''} ${phase>=8&&i===challenger&&j===champion?'chosen-upper':''} ${testRow===i&&u<.5?'failing-upper':''}`}>{u.toFixed(2)}</td>)}</tr>)}</tbody></table>
+     <div className="rucb-matrix-heading">Computed <MathLine tex="U"/> · <MathLine tex={`t=${round+(updated?1:0)}`}/> · <MathLine tex={String.raw`\alpha=1`}/></div>
+     <table className="rucb-upper-table" aria-label="U matrix: row i beats column j"><thead><tr><th><MathLine tex={String.raw`i\downarrow\;\cdot\;j\rightarrow`}/></th>{[...letters].map((c,j)=><th key={c} className={phase>=7&&j===champion?'champion-column':''}><MathLine tex={c}/></th>)}</tr></thead><tbody>{table.map((row,i)=><tr key={i} className={`${testRow===i?'testing-row':''} ${testRow>=0&&testRow!==i?'untested-row':''}`}><th style={{color:colors[i]}}><MathLine tex={letters[i]}/></th>{row.map((u,j)=><td key={j} className={`${phase>=7&&j===champion?'champion-column':''} ${phase>=8&&i===challenger&&j===champion?'chosen-upper':''} ${testRow===i&&u<.5?'failing-upper':''}`}>{u.toFixed(2)}</td>)}</tr>)}</tbody></table>
      {testRow>=0&&<div className={`rucb-row-verdict ${testRow>=2?'reject':''}`}><MathLine tex={testRow<2?String.raw`U_{${letters[testRow]}j}\ge\tfrac12\quad\forall j\quad\checkmark`:String.raw`U_{${letters[testRow]}A}=0.39<\tfrac12\quad\times`}/></div>}
      <ArmArena phase={phase}/>
     </>}
