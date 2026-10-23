@@ -12,7 +12,7 @@ import {ExperimentsSlide} from './ExperimentsSlide.jsx';
 import {NetflixSlide} from './NetflixSlide.jsx';
 import {RucbRecapSlide} from './RucbRecapSlide.jsx';
 import {walkthroughFrames} from './parwisWalkthrough.js';
-const MEASURES_START = 39 + walkthroughFrames.length;
+const MEASURES_START = 44 + walkthroughFrames.length;
 const EXPERIMENTS_START = MEASURES_START + 4;
 const NETFLIX_START = EXPERIMENTS_START + 1;
 const RESULTS_START = NETFLIX_START + 6;
@@ -270,7 +270,7 @@ function ModellingSlide({active, step: reveal}) {
 
 function App() {
   const [stage, setStage] = useState(0);
-  const slideNumber = stage === 0 ? 1 : stage <= 3 ? 2 : stage <= 11 ? 3 : stage <= 18 ? 4 : stage <= 22 ? 5 : stage <= 27 ? 6 : stage <= 31 ? 7 : stage <= 34 ? 8 : stage <= 38 ? 9 : stage < MEASURES_START ? 10 : stage < EXPERIMENTS_START ? 11 : stage < NETFLIX_START ? 12 : stage < RESULTS_START ? 13 : stage < LAST_STAGE ? 14 : 15;
+  const slideNumber = stage === 0 ? 1 : stage <= 3 ? 2 : stage <= 11 ? 3 : stage <= 23 ? 4 : stage <= 27 ? 5 : stage <= 32 ? 6 : stage <= 36 ? 7 : stage <= 39 ? 8 : stage <= 43 ? 9 : stage < MEASURES_START ? 10 : stage < EXPERIMENTS_START ? 11 : stage < NETFLIX_START ? 12 : stage < RESULTS_START ? 13 : stage < LAST_STAGE ? 14 : 15;
   const next = () => setStage(value => Math.min(LAST_STAGE, value + 1));
   const previous = () => setStage(value => Math.max(0, value - 1));
 
@@ -304,13 +304,13 @@ function App() {
     <main className="presentation">
       <OpeningSlide active={stage === 0} />
       <ProblemSlide active={stage >= 1 && stage <= 3} revealed={stage >= 2} noisy={stage >= 3} />
-      <ModellingSlide active={(stage >= 4 && stage <= 11) || (stage >= 19 && stage <= 22)} step={stage <= 11 ? stage - 4 : stage - 10} />
-      <RucbRecapSlide active={stage >= 12 && stage <= 18} step={stage - 12} />
-      <StoryTimeSlide active={stage >= 23 && stage <= 27} step={stage - 23} />
-      <LastComparisonSlide active={stage >= 28 && stage <= 31} step={stage - 28} />
-      <BothOutcomesSlide active={stage >= 32 && stage <= 34} step={stage - 32} />
-      <ChessSelectionSlide active={stage >= 35 && stage <= 38} step={stage - 35} />
-      <AlgorithmSlide active={stage >= 39 && stage < MEASURES_START} step={stage - 39} />
+      <ModellingSlide active={(stage >= 4 && stage <= 11) || (stage >= 24 && stage <= 27)} step={stage <= 11 ? stage - 4 : stage - 15} />
+      <RucbRecapSlide active={stage >= 12 && stage <= 23} step={stage - 12} />
+      <StoryTimeSlide active={stage >= 28 && stage <= 32} step={stage - 28} />
+      <LastComparisonSlide active={stage >= 33 && stage <= 36} step={stage - 33} />
+      <BothOutcomesSlide active={stage >= 37 && stage <= 39} step={stage - 37} />
+      <ChessSelectionSlide active={stage >= 40 && stage <= 43} step={stage - 40} />
+      <AlgorithmSlide active={stage >= 44 && stage < MEASURES_START} step={stage - 44} />
       <DisruptionMeasuresSlide active={stage >= MEASURES_START && stage < EXPERIMENTS_START} step={stage - MEASURES_START} />
       <ExperimentsSlide active={stage === EXPERIMENTS_START || (stage >= RESULTS_START && stage < LAST_STAGE)} step={stage === EXPERIMENTS_START ? 0 : stage - RESULTS_START + 1} />
       <NetflixSlide active={stage >= NETFLIX_START && stage < RESULTS_START} step={stage - NETFLIX_START} />
