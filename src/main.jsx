@@ -270,6 +270,7 @@ function ModellingSlide({active, step: reveal}) {
 
 function App() {
   const [stage, setStage] = useState(0);
+  const slideNumber = stage === 0 ? 1 : stage <= 3 ? 2 : stage <= 16 ? 3 : stage <= 21 ? 4 : stage <= 25 ? 5 : stage <= 28 ? 6 : stage <= 32 ? 7 : stage < MEASURES_START ? 8 : stage < EXPERIMENTS_START ? 9 : stage < NETFLIX_START ? 10 : stage < RESULTS_START ? 11 : stage < LAST_STAGE ? 12 : 13;
   const next = () => setStage(value => Math.min(LAST_STAGE, value + 1));
   const previous = () => setStage(value => Math.max(0, value - 1));
 
@@ -317,6 +318,7 @@ function App() {
         <p className="questions-presenters">Saranath P &amp; Srividhya Sethuraman</p>
         <p className="questions-paper">PARWiS · ICDM 2021</p>
       </section>
+      <div className="presentation-page-number" aria-label={`Slide ${slideNumber} of 13`}>{slideNumber} / 13</div>
       <nav className="slide-controls" aria-label="Presentation navigation">
         <button onClick={previous} disabled={stage === 0} aria-label="Previous reveal or slide">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12 H5 M11 6 L5 12 L11 18" /></svg>

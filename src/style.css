@@ -1104,3 +1104,5 @@ p { margin: 0; }
 .staged-model-flow .model-parked-left .netflix-rating-definition .netflix-equation { font-size:clamp(10px,.88vw,14px); }
 .staged-model-flow .model-rating-panel .netflix-rating-example { font-size:clamp(15px,1.4vw,22px); margin-top:14px; }
 .staged-model-flow .model-parked-left .netflix-rating-example { font-size:clamp(12px,1vw,16px); }
+
+.presentation-page-number { position:absolute; bottom:18px; left:20px; z-index:10; color:#777; font-size:16px; font-variant-numeric:tabular-nums; pointer-events:none; }
