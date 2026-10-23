@@ -40,6 +40,10 @@ export function AlgorithmSlide({active,step}){
             const x=playing?(frame.pair[0]===index?120:440):(index%2===0?120:440),y=playing?210:(index<2?90:330);
             return <g key={player.name} style={{transform:`translate(${x}px,${y}px)`}} className={`parwis-live-player ${frame.pair&&!involved?'waiting':''} ${involved?'in-match':''}`}>
               <SeatedPlayer color={player.color} facingLeft={playing?frame.pair[1]===index:index%2===1} portrait={index} pleased={won} />
+              {won&&<g className="winner-crown" role="img" aria-label={`${player.name} wins`}>
+                <path d="M-23-63 L-13-54 L0-70 L13-54 L23-63 L18-43 H-18 Z" fill="#efc349" stroke="#8b6818" strokeWidth="1.8" strokeLinejoin="round" />
+                <path d="M-18-39 H18" fill="none" stroke="#8b6818" strokeWidth="3" strokeLinecap="round" />
+              </g>}
               <text x="0" y="151" textAnchor="middle" fontSize="23">{player.name}</text>
               <text x="0" y="180" textAnchor="middle" fontSize="27" fill={player.color}>{frame.ratings[index]}</text>
             </g>;
