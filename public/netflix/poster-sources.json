@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Nayakan",
+    "page": "https://en.wikipedia.org/wiki/Nayakan",
+    "image": "https://upload.wikimedia.org/wikipedia/en/d/d0/Nayakan_poster.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+    "file": "public/netflix/nayakan-poster.jpg"
+  },
+  {
+    "title": "Padayappa",
+    "page": "https://en.wikipedia.org/wiki/Padayappa",
+    "image": "https://upload.wikimedia.org/wikipedia/en/d/d4/Padayappa.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+    "file": "public/netflix/padayappa-poster.jpg"
+  },
+  {
+    "title": "Anbe_Sivam",
+    "page": "https://en.wikipedia.org/wiki/Anbe_Sivam",
+    "image": "https://upload.wikimedia.org/wikipedia/en/5/52/Anbe_Sivam.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+    "file": "public/netflix/anbe-sivam-poster.jpg"
+  },
+  {
+    "title": "Ghilli",
+    "page": "https://en.wikipedia.org/wiki/Ghilli",
+    "image": "https://upload.wikimedia.org/wikipedia/en/1/13/Ghilli_poster.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+    "file": "public/netflix/ghilli-poster.jpg"
+  }
+]

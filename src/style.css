@@ -975,7 +975,7 @@ p { margin: 0; }
 .netflix-catalogue { width:46%; }
 .netflix-shelf { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:15px; }
 .netflix-movie { text-align:center; min-width:0; }
-.netflix-cover { width:100%; aspect-ratio:2/3; background-image:url('/parwis-presentation/netflix/tamil-dvd-covers.png'); background-size:200% 200%; border:3px solid #fff; outline:1px solid #bbb; box-shadow:2px 3px 0 #ddd7c9; }
+.netflix-cover { display:block; width:100%; aspect-ratio:2/3; object-fit:contain; background:#fff; border:3px solid #fff; outline:1px solid #bbb; box-shadow:2px 3px 0 #ddd7c9; }
 .cover-0 { background-position:0 0; }.cover-1 { background-position:100% 0; }.cover-2 { background-position:0 100%; }.cover-3 { background-position:100% 100%; }
 .netflix-movie h3 { font-size:clamp(17px,1.5vw,23px); margin:13px 0 5px; font-weight:400; }
 .netflix-movie p { font-size:clamp(15px,1.3vw,19px); color:#666; }
@@ -1058,3 +1058,43 @@ p { margin: 0; }
  .netflix-results { grid-template-columns:1fr; }.netflix-results aside { display:none; }.netflix-results-legend { font-size:19px; }
 }
 @media(prefers-reduced-motion:reduce) { .netflix-scene,.netflix-oracle-output { animation:none; } }
+
+.staged-model-flow { display:block; position:relative; height:100%; min-height:430px; }
+.staged-model-flow article { position:absolute; left:50%; top:50%; width:56%; transform:translate(-50%,-50%); transition:left 850ms cubic-bezier(.22,1,.36,1),width 850ms cubic-bezier(.22,1,.36,1),opacity 550ms,visibility 550ms; }
+.staged-model-flow article h3 { font-size:clamp(30px,2.7vw,42px); margin:14px 0 22px; transition:font-size 700ms; }
+.staged-model-flow .mini-pair .netflix-movie { width:115px; transition:width 750ms; }
+.staged-model-flow .mini-pair .netflix-movie h3 { font-size:20px; }
+.staged-model-flow .netflix-equation { font-size:clamp(23px,2.1vw,33px); }
+.staged-model-flow .model-probability-panel,.staged-model-flow .model-fit-panel { opacity:0; visibility:hidden; }
+.staged-model-flow .model-panel-visible { opacity:1; visibility:visible; }
+.staged-model-flow .model-parked-left { left:12%; width:23%; }
+.staged-model-flow .model-parked-right { left:88%; width:22%; }
+.staged-model-flow .model-fit-panel { width:39%; }
+.staged-model-flow .model-parked-left h3,.staged-model-flow .model-parked-right h3 { font-size:clamp(22px,1.8vw,29px); }
+.staged-model-flow .model-parked-left .mini-pair .netflix-movie { width:64px; }
+.staged-model-flow .model-parked-left .mini-pair .netflix-movie h3 { font-size:15px; }
+.staged-model-flow .model-parked-left .netflix-equation,.staged-model-flow .model-parked-right .netflix-equation { font-size:clamp(13px,1.2vw,19px); }
+.staged-model-flow .model-parked-left p,.staged-model-flow .model-parked-right p { font-size:clamp(15px,1.3vw,20px); }
+.staged-model-flow .model-parked-left small,.staged-model-flow .model-parked-right small { font-size:13px; }
+.staged-model-flow article > .netflix-moving-sigmoid { display:block; width:100%; max-width:450px; height:auto; margin:10px auto; }
+.model-fit-panel.model-panel-visible .netflix-score-bars i { transform-origin:left; animation:netflix-fit-bar 850ms cubic-bezier(.22,1,.36,1) both; }
+@keyframes netflix-fit-bar { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+@media(max-height:760px) and (min-width:651px) {
+ .staged-model-flow { min-height:410px; }
+ .staged-model-flow .mini-pair .netflix-movie { width:88px; }
+ .staged-model-flow article h3 { margin:9px 0 14px; }
+ .staged-model-flow article > .netflix-moving-sigmoid { max-width:330px; }
+ .staged-model-flow .model-parked-left .mini-pair .netflix-movie { width:55px; }
+}
+@media(max-width:650px) {
+ .staged-model-flow { min-height:400px; }
+ .staged-model-flow article { width:65%; }.staged-model-flow article h3 { font-size:22px; }
+ .staged-model-flow .model-parked-left { left:12%; width:22%; }.staged-model-flow .model-parked-right { left:88%; width:22%; }
+ .staged-model-flow .model-parked-left h3,.staged-model-flow .model-parked-right h3 { font-size:13px; }
+ .staged-model-flow .model-parked-left .mini-pair .netflix-movie { width:30px; }
+ .staged-model-flow .model-parked-left .mini-pair .netflix-movie h3 { font-size:9px; }
+ .staged-model-flow .model-parked-left .netflix-equation,.staged-model-flow .model-parked-right .netflix-equation { font-size:7px; }
+ .staged-model-flow .model-parked-left p,.staged-model-flow .model-parked-right p,.staged-model-flow .model-parked-left small,.staged-model-flow .model-parked-right small { font-size:10px; }
+ .staged-model-flow .model-fit-panel { width:42%; }.staged-model-flow .model-fit-panel h3 { font-size:19px; }.staged-model-flow .model-fit-panel .netflix-equation { font-size:13px; }
+}
+@media(prefers-reduced-motion:reduce) { .model-fit-panel.model-panel-visible .netflix-score-bars i { animation:none; } }

@@ -1,7 +1,7 @@
 # Netflix classroom sequence
 
 - Historical Netflix wordmark (2001–2014): https://commons.wikimedia.org/wiki/File:Netflix_logo.svg ; downloaded original https://upload.wikimedia.org/wikipedia/commons/6/69/Netflix_logo.svg . Netflix trademark; Commons labels the text logo PD-textlogo.
-- Original movie-cover illustrations generated for this presentation. The four depicted films are Nayakan, Padayappa, Anbe Sivam, and Ghilli; these teaching examples are not asserted to be records in the Netflix Prize top-100 subset.
+- Actual theatrical release posters for Nayakan, Padayappa, Anbe Sivam, and Ghilli, downloaded unchanged from the film pages on English Wikipedia. Page and original-image URLs are recorded in `poster-sources.json`; poster rights remain with the respective film rights holders. The teaching titles/ratings are not asserted to be Netflix Prize top-100 records. Generated cover art is no longer used.
 - Dataset structure: Netflix-provided README mirrored at https://www.kaggle.com/datasets/netflix-inc/netflix-prize-data ; movie-specific files contain CustomerID,Rating,Date records, ratings 1–5. The example users and ratings are synthetic.
 - Pipeline checked against PARWiS §V-E and https://github.com/DevSheth/active-ranking-under-shoe-string-budget/blob/master/datasets/netflix.py : top 100 by rating count; average paired-user rating differences; logistic pairwise probabilities; spectral ranking; normalized scores.
 - Demo model: complete illustrative rating matrix; its consistent mean-difference probabilities have BTL weights proportional to exp(mean rating). These are global BTL scores, not an empirical fit to the real Netflix dataset.

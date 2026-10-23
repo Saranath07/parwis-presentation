@@ -14,7 +14,7 @@ import {walkthroughFrames} from './parwisWalkthrough.js';
 const MEASURES_START = 33 + walkthroughFrames.length;
 const EXPERIMENTS_START = MEASURES_START + 4;
 const NETFLIX_START = EXPERIMENTS_START + 1;
-const LAST_STAGE = NETFLIX_START + 4;
+const LAST_STAGE = NETFLIX_START + 6;
 
 function OpeningSlide({active}) {
 
