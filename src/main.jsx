@@ -224,18 +224,19 @@ function SetupVisuals({reveal}) {
       <Equation tex={String.raw`\mathcal I=\{1,\ldots,N\}`} />
       <p>Unknown strengths <span className="setup-inline-math">wᵢ &gt; 0</span></p>
     </div>
-    <div className={`formal-setup-budget ${reveal>=1?'setup-visible':''} ${reveal>=2?'setup-parked-right':''} ${reveal>=3?'setup-dismissed':''}`} aria-hidden={reveal<1||reveal>=3}>
+    <div className={`formal-setup-budget ${reveal>=2?'setup-visible':''} ${reveal>=3?'setup-dismissed':''}`} aria-hidden={reveal<2||reveal>=3}>
       <h3>A budget of B games</h3>
-      <svg viewBox="0 0 440 250" role="img" aria-label="B comparison tokens; one token pays for one game between a chosen pair">
-        {[0,1,2,3,4].map(i=><g key={i} className="setup-budget-token" style={{animationDelay:`${i*120}ms`}}>
-          <rect x={30+i*76} y="50" width="66" height="90" rx="9" fill={i%2?'#eee':'#fff'} stroke="#111" strokeWidth="2"/>
-          <circle cx={63+i*76} cy="79" r="8" fill="#111"/><path d={`M${57+i*76} 90 L${53+i*76} 109 H${73+i*76} L${69+i*76} 90 Z M${50+i*76} 110 H${76+i*76} V117 H${50+i*76} Z`} fill="#111"/>
-        </g>)}
-        <path d="M40 157 V168 H400 V157" fill="none" stroke="#999" strokeWidth="2"/>
-        <text x="220" y="205" textAnchor="middle" fontSize="34">B tokens</text>
+      <svg viewBox="0 0 440 250" role="img" aria-label="A budget of B games, each shown as two differently coloured people facing each other">
+        {[[0,1],[2,3],[0,2],[1,3]].map(([a,b],index)=><g key={index} transform={`translate(${15+(index%2)*215} ${12+Math.floor(index/2)*100})`}><g className="setup-budget-token" style={{animationDelay:`${index*120}ms`}}>
+          <rect width="195" height="85" rx="9" fill="#fff" stroke="#bbb" strokeWidth="1.5"/>
+          <g transform="translate(48 33) scale(.35)"><Player x={0} y={0} color={setupColors[a]}/></g>
+          <text x="98" y="47" textAnchor="middle" fontSize="21">vs</text>
+          <g transform="translate(147 33) scale(.35)"><Player x={0} y={0} color={setupColors[b]}/></g>
+        </g></g>)}
+        <text x="220" y="242" textAnchor="middle" fontSize="29">… B games in total</text>
       </svg>
       <Equation tex={String.raw`1\text{ game}=1\text{ pairwise comparison}`} />
-      <p>Choose the pair. Spend one token.</p>
+      <p>Choose a pair. Use one comparison.</p>
     </div>
   </>;
 }
@@ -245,13 +246,13 @@ function ModellingSlide({active, step: reveal, bridgeOnly = false}) {
   return (
     <section className={`modelling-slide slide ${bridgeOnly ? 'bridge-slide' : ''} ${active ? 'active' : ''} ${step >= 7 ? 'bridge-active' : ''} ${step >= 9 ? 'uncertainty-revealed' : ''}`} aria-label="BTL modelling and lecture recap" data-step={step} aria-hidden={!active} inert={!active}>
       <h2 aria-hidden={step >= 7}>{reveal<=2?'Active ranking: the setup':'Modelling noisy comparisons'}</h2>
-      <div className={`modelling-stage ${reveal<=2?'formal-setup-stage':''}`}>
+      <div className={`modelling-stage ${reveal<=2?'formal-setup-stage':''} ${reveal===2?'budget-focused':''}`}>
         <SetupVisuals reveal={reveal} />
-        <div className={`btl-block ${reveal<2?'setup-btl-hidden':''} ${step >= 1 ? 'at-top' : ''}`} aria-hidden={reveal<2||step >= 7}>
+        <div className={`btl-block ${reveal<1?'setup-btl-hidden':''} ${step >= 1 ? 'at-top' : ''}`} aria-hidden={reveal<1||step >= 7}>
           <h3>BTL assumption</h3>
           <Equation tex={String.raw`p_{ij}=\Pr(i\succ j)=\frac{w_i}{w_i+w_j}`} />
           <div className={`btl-animation-wrapper ${step >= 1 ? 'disappeared' : ''}`} aria-hidden={step >= 1}>
-            <BTLAnimation playing={active && step === 0} />
+            <BTLAnimation playing={active && (reveal === 1 || reveal === 2)} />
           </div>
         </div>
         <p className={`lecture-intro ${step >= 1 ? 'visible' : ''}`} aria-hidden={step < 1 || step >= 7}>From the lectures</p>

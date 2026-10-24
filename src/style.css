@@ -1228,3 +1228,11 @@ p { margin: 0; }
  .markov-expected-score p { font-size:18px; }
 }
 @media(max-width:650px) { .markov-math { font-size:10px; } .markov-definition h3,.markov-local-push h3 { font-size:17px; } .markov-definition p,.markov-local-push p,.markov-push-reveal > span { font-size:12px; } .markov-flow { width:100%; } .markov-expected-score .markov-math { font-size:18px; } .markov-expected-score p { font-size:14px; } }
+
+.formal-setup-stage .btl-block { transition:left 850ms cubic-bezier(.22,1,.36,1),width 850ms cubic-bezier(.22,1,.36,1),top 800ms ease,opacity 450ms ease,visibility 450ms; }
+.formal-setup-stage.budget-focused .btl-block { left:89%; width:20%; top:27%; }
+.formal-setup-stage.budget-focused .btl-block h3 { font-size:19px; margin-bottom:12px; }
+.formal-setup-stage.budget-focused .btl-block > .equation { font-size:15px; }
+.formal-setup-stage.budget-focused .btl-animation-wrapper { margin-top:14px; }
+.formal-setup-stage.budget-focused .sigmoid-equation { font-size:10px; }
+@media(max-width:650px) { .formal-setup-stage.budget-focused .btl-block { left:86%; width:25%; } .formal-setup-stage.budget-focused .btl-block h3 { font-size:14px; } .formal-setup-stage.budget-focused .btl-block > .equation { font-size:10px; } .formal-setup-stage.budget-focused .sigmoid-equation { font-size:7px; } }
