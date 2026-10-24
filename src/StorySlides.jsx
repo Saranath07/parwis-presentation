@@ -5,7 +5,7 @@ function MathLine({tex, className = ''}) {
   return <div className={`story-math ${className}`} dangerouslySetInnerHTML={{__html:katex.renderToString(tex,{displayMode:true,throwOnError:true,strict:'error'})}} />;
 }
 function DoodlePerson({color, side, talking, agreed}) {
-  return <svg className={`doodle-person ${talking ? 'talking' : ''}`} viewBox="0 0 220 250" role="img" aria-label={side === 'left' ? 'Srividhya advocating bandits' : 'Me advocating active ranking'}>
+  return <svg className={`doodle-person ${talking ? 'talking' : ''}`} viewBox="0 0 220 250" role="img" aria-label={side === 'left' ? 'Srividhya advocating bandits' : 'Saranath advocating active ranking'}>
     <path d="M70 158 Q110 138 150 158 L163 237 H57 Z" fill={color} stroke="#000" strokeWidth="2.5" />
     <path d={agreed ? 'M72 169 L38 127 L27 136 M148 169 L182 127 L193 136' : side === 'left' ? 'M72 169 L40 193 L25 172 M148 169 L185 146 L194 156' : 'M72 169 L40 146 L26 157 M148 169 L180 193 L195 172'} fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" />
     <g className="doodle-head">
@@ -34,7 +34,7 @@ export function StoryTimeSlide({active, step}) {
       <div className="comic-person">
         <Show visible={step >= 2 && step < 3} className="speech-bubble">“Let’s do active ranking.”</Show>
         <DoodlePerson side="right" color="#8862ae" talking={active && step === 2} agreed={step >= 3} />
-        <span className="comic-label">Me</span>
+        <span className="comic-label">Saranath</span>
       </div>
       <Show visible={step >= 3 && step < 4} className="shared-bubble">“Let’s pick something we can explain<br />before the presentation ends.”</Show>
     </div>
@@ -57,7 +57,7 @@ export function LastComparisonSlide({active, step}) {
         <h3>A familiar paper</h3>
         <img className="challenger-paper-preview" src={`${import.meta.env.BASE_URL}papers/wisdom-first-page.png`} alt="First page of WiSDoM: Frugal Winner Selection by Design of Matchups"/>
         <p className="challenger-paper-title">WiSDoM</p>
-        <Show visible={step >= 1} className="challenger-paper-details"><p>Saranath P · Arun Rajkumar</p><p>Uncertainty in Data Mining Workshop<br/>KDD 2026</p></Show>
+        <Show visible={step >= 1} className="challenger-paper-details"><p>Saranath P · Arun Rajkumar</p><p>The 5th Workshop on Uncertainty Reasoning<br/>and Quantification in Decision Making<br/>KDD 2026</p></Show>
       </div>
       <div className="challenger-option">
         <div className="comparison-connector" aria-hidden="true" />
