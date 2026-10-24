@@ -95,7 +95,7 @@ const itemColors = ['#3276b1', '#c75a59', '#35956b', '#8862ae'];
 function ItemNode({x, y, index, radius = 17}) {
   return <g>
     <circle cx={x} cy={y} r={radius} fill={itemColors[index]} />
-    <text x={x} y={y + 6} textAnchor="middle" fill="white" fontSize="19">{'ABCD'[index]}</text>
+    <text x={x} y={y + 6} textAnchor="middle" fill="white" fontSize="20.9">{'ABCD'[index]}</text>
   </g>;
 }
 
@@ -134,10 +134,10 @@ function KnockoutVisual({playing}) {
         {[65,185,315,435].map((x, index) => <ItemNode key={index} x={x} y={35} index={index} />)}
         {firstAdvanced && <ItemNode x={125} y={112} index={0} />}
         {secondAdvanced && <ItemNode x={375} y={112} index={3} />}
-        {complete && <><ItemNode x={250} y={197} index={3} /><text x="285" y="204" fontSize="19">Winner</text></>}
+        {complete && <><ItemNode x={250} y={197} index={3} /><text x="285" y="204" fontSize="20.9">Winner</text></>}
         <text x="250" y="242" textAnchor="middle" className="match-status">{complete ? 'Majority winners advance → restart' : `${'ABCD'[pair[0]]} vs ${'ABCD'[pair[1]]} · comparison ${votes.length} / 5`}</text>
         {Array.from({length: 5}, (_, i) => <circle key={i} cx={190+i*30} cy="270" r="9" fill={votes[i] === undefined ? 'white' : itemColors[votes[i]]} stroke={votes[i] === undefined ? '#bbb' : itemColors[votes[i]]} />)}
-        <text x="250" y="300" textAnchor="middle" fontSize="23">{'ABCD'[pair[0]]}: {leftWins}　 {'ABCD'[pair[1]]}: {rightWins}</text>
+        <text x="250" y="300" textAnchor="middle" fontSize="25.3">{'ABCD'[pair[0]]}: {leftWins}　 {'ABCD'[pair[1]]}: {rightWins}</text>
         <text x="250" y="326" textAnchor="middle" className="algorithm-caption">Illustrative votes · five comparisons per match</text>
       </svg>
     </figure>
@@ -162,11 +162,11 @@ function DuellingVisual({playing}) {
         <circle cx={c[0]} cy={c[1]} r="27" className="active-item-ring" />
         {phase >= 1 && <circle cx={d[0]} cy={d[1]} r="27" className="challenger-ring" />}
         {positions.map(([x,y], index) => <ItemNode key={index} x={x} y={y} index={index} />)}
-        <text x={c[0]} y={c[1]-38} textAnchor="middle" fontSize="18">Champion</text>
-        {phase >= 1 && <text x={d[0]} y={d[1]+45} textAnchor="middle" fontSize="18">Challenger</text>}
+        <text x={c[0]} y={c[1]-38} textAnchor="middle" fontSize="19.8">Champion</text>
+        {phase >= 1 && <text x={d[0]} y={d[1]+45} textAnchor="middle" fontSize="19.8">Challenger</text>}
         <text x="250" y="242" textAnchor="middle" className="match-status">{phases[phase]}</text>
-        {phase === 2 ? <text x="250" y="277" textAnchor="middle" fontSize="25" fill={itemColors[record.winner]}>{'ABCD'[record.winner]} wins</text> : <text x="250" y="277" textAnchor="middle" fontSize="23">{phase === 0 ? `Champion: ${'ABCD'[record.champion]}` : `${'ABCD'[record.champion]} vs ${'ABCD'[record.challenger]}　 N = ${current.n}${phase === 3 ? '  ↑' : ''}`}</text>}
-        <text x="250" y="305" textAnchor="middle" fontSize="18">{phase === 3 ? `Empirical win fraction: ${(current.wins / Math.max(1, current.n)).toFixed(2)}` : `Round ${record.round}`}</text>
+        {phase === 2 ? <text x="250" y="277" textAnchor="middle" fontSize="27.5" fill={itemColors[record.winner]}>{'ABCD'[record.winner]} wins</text> : <text x="250" y="277" textAnchor="middle" fontSize="25.3">{phase === 0 ? `Champion: ${'ABCD'[record.champion]}` : `${'ABCD'[record.champion]} vs ${'ABCD'[record.challenger]}　 N = ${current.n}${phase === 3 ? '  ↑' : ''}`}</text>}
+        <text x="250" y="305" textAnchor="middle" fontSize="19.8">{phase === 3 ? `Empirical win fraction: ${(current.wins / Math.max(1, current.n)).toFixed(2)}` : `Round ${record.round}`}</text>
         <text x="250" y="329" textAnchor="middle" className="algorithm-caption">Illustrative run of the lecture’s simplified RUCB</text>
       </svg>
     </figure>
@@ -199,13 +199,13 @@ function BTLAnimation({playing}) {
       <svg className="btl-animation" viewBox="0 0 600 310" role="img" aria-label={`BTL sigmoid: log strength difference ${difference.toFixed(2)}, win probability ${probability.toFixed(2)}. A ball moves continuously along the curve.`}>
         <path d="M70 25 V243 H555" className="sigmoid-axis" />
         <path d="M70 139 H530 M300 35 V243" className="sigmoid-grid" />
-        {[0,.5,1].map(value => <text key={value} x="53" y={y(value)+6} textAnchor="end" fontSize="18">{value}</text>)}
-        {[-4,-2,0,2,4].map(value => <text key={value} x={x(value)} y="266" textAnchor="middle" fontSize="18">{value}</text>)}
-        <text x="24" y="17" fontSize="21">p<tspan baselineShift="sub" fontSize="14">ij</tspan></text>
+        {[0,.5,1].map(value => <text key={value} x="53" y={y(value)+6} textAnchor="end" fontSize="19.8">{value}</text>)}
+        {[-4,-2,0,2,4].map(value => <text key={value} x={x(value)} y="266" textAnchor="middle" fontSize="19.8">{value}</text>)}
+        <text x="24" y="17" fontSize="23.1">p<tspan baselineShift="sub" fontSize="15.4">ij</tspan></text>
         <path d={path} className="sigmoid-curve" />
         <path d={`M${x(difference)} 243 V${y(probability)} H70`} className="sigmoid-projection" />
         <circle className="sigmoid-ball" cx={x(difference)} cy={y(probability)} r="9" fill={itemColors[0]} />
-        <text x="300" y="301" textAnchor="middle" fontSize="22">θᵢ − θⱼ = {difference.toFixed(2)}　 pᵢⱼ = {probability.toFixed(2)}</text>
+        <text x="300" y="301" textAnchor="middle" fontSize="24.2">θᵢ − θⱼ = {difference.toFixed(2)}　 pᵢⱼ = {probability.toFixed(2)}</text>
       </svg>
       <Equation className="sigmoid-equation" tex={String.raw`p_{ij}=\sigma(\theta_i-\theta_j),\qquad\theta_i=\log w_i`} />
     </>
@@ -219,7 +219,7 @@ function SetupVisuals({reveal}) {
       <h3>N items</h3>
       <svg viewBox="0 0 440 250" role="img" aria-label="A collection of N items with unknown strengths">
         {setupColors.map((color,index)=><g key={color} transform={`translate(${55+(index%5)*82} ${45+Math.floor(index/5)*110})`}><g className="setup-item-arrival" style={{animationDelay:`${index*60}ms`}}><g transform="scale(.45)"><Player x={0} y={0} color={color}/></g></g></g>)}
-        <text x="220" y="240" textAnchor="middle" fontSize="32">…</text>
+        <text x="220" y="240" textAnchor="middle" fontSize="35.2">…</text>
       </svg>
       <Equation tex={String.raw`\mathcal I=\{1,\ldots,N\}`} />
       <p>Unknown strengths <span className="setup-inline-math">wᵢ &gt; 0</span></p>
@@ -230,10 +230,10 @@ function SetupVisuals({reveal}) {
         {[[0,1],[2,3],[0,2],[1,3]].map(([a,b],index)=><g key={index} transform={`translate(${15+(index%2)*215} ${12+Math.floor(index/2)*100})`}><g className="setup-budget-token" style={{animationDelay:`${index*120}ms`}}>
           <rect width="195" height="85" rx="9" fill="#fff" stroke="#bbb" strokeWidth="1.5"/>
           <g transform="translate(48 33) scale(.35)"><Player x={0} y={0} color={setupColors[a]}/></g>
-          <text x="98" y="47" textAnchor="middle" fontSize="21">vs</text>
+          <text x="98" y="47" textAnchor="middle" fontSize="23.1">vs</text>
           <g transform="translate(147 33) scale(.35)"><Player x={0} y={0} color={setupColors[b]}/></g>
         </g></g>)}
-        <text x="220" y="242" textAnchor="middle" fontSize="29">… B games in total</text>
+        <text x="220" y="242" textAnchor="middle" fontSize="31.9">… B games in total</text>
       </svg>
       <Equation tex={String.raw`1\text{ game}=1\text{ pairwise comparison}`} />
       <p>Choose a pair. Use one comparison.</p>

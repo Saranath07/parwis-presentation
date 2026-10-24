@@ -22,7 +22,7 @@ const messages=[
 function ArmArena({phase}){
  const candidatesReady=phase>=3,challenge=phase>=8;
  return <svg className="rucb-arm-arena" viewBox="0 0 500 215" role="img" aria-label={messages[phase]}>
-  {candidatesReady&&!challenge&&<><rect x="25" y="110" width="250" height="93" rx="8" fill="#f8f8f8" stroke="#bbb"/><text x="150" y="139" textAnchor="middle" fontSize="18">Candidate set C</text><rect x="305" y="110" width="170" height="93" rx="8" fill="#fafafa" stroke="#ddd"/><text x="390" y="139" textAnchor="middle" fontSize="18" fill="#888">Rejected</text></>}
+  {candidatesReady&&!challenge&&<><rect x="25" y="110" width="250" height="93" rx="8" fill="#f8f8f8" stroke="#bbb"/><text x="150" y="139" textAnchor="middle" fontSize="19.8">Candidate set C</text><rect x="305" y="110" width="170" height="93" rx="8" fill="#fafafa" stroke="#ddd"/><text x="390" y="139" textAnchor="middle" fontSize="19.8" fill="#888">Rejected</text></>}
   {challenge&&<path d="M160 82 H370" fill="none" stroke="#111" strokeWidth="2"/>}
   {[...letters].map((label,i)=>{
    let x=65+i*122,y=phase===0?105:45;
@@ -30,10 +30,10 @@ function ArmArena({phase}){
    if(challenge){x=i===1?160:i===3?370:i===0?55:455;y=i===1||i===3?82:165;}
    const rejected=phase>=3+i&&i>=2;
    return <g key={label} className="rucb-moving-arm" style={{transform:`translate(${x}px,${y}px)`,opacity:challenge&&i!==1&&i!==3?.2:rejected&&!challenge?.45:1}}>
-    <circle r={phase===0?28:phase===7&&i===1?26:22} fill={colors[i]}/><text y="7" textAnchor="middle" fill="white" fontSize="24">{label}</text>
-    {challenge&&i===1&&<text y="52" textAnchor="middle" fontSize="18">Champion</text>}
-    {phase===8&&i===3&&<text y="52" textAnchor="middle" fontSize="18">Challenger</text>}
-    {phase>=9&&i===3&&<><path d="M-18-45 L-11-37 L0-51 L11-37 L18-45 L14-29 H-14 Z" fill="#efc349" stroke="#8b6818"/><text y="52" textAnchor="middle" fontSize="18">Wins this draw</text></>}
+    <circle r={phase===0?28:phase===7&&i===1?26:22} fill={colors[i]}/><text y="7" textAnchor="middle" fill="white" fontSize="26.4">{label}</text>
+    {challenge&&i===1&&<text y="52" textAnchor="middle" fontSize="19.8">Champion</text>}
+    {phase===8&&i===3&&<text y="52" textAnchor="middle" fontSize="19.8">Challenger</text>}
+    {phase>=9&&i===3&&<><path d="M-18-45 L-11-37 L0-51 L11-37 L18-45 L14-29 H-14 Z" fill="#efc349" stroke="#8b6818"/><text y="52" textAnchor="middle" fontSize="19.8">Wins this draw</text></>}
    </g>;
   })}
  </svg>;

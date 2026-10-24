@@ -58,13 +58,13 @@ export function ChessSelectionSlide({active, step}) {
           const [x,y]=playing&&selected?destination:positions[index];
           return <g key={player.name} className={`chess-player ${selected?'selected-player':'other-player'}`} style={{transform:`translate(${x}px,${y}px)`}}>
             <SeatedPlayer color={player.color} portrait={index} pleased={chosen&&selected} facingLeft={playing&&selected?index===selectedChessPair.j:index%2===1} />
-            <text x="0" y="151" textAnchor="middle" fontSize="23">{player.name}</text>
-            <text x="0" y="179" textAnchor="middle" fontSize="22" fill="#555">{player.rating}</text>
+            <text x="0" y="151" textAnchor="middle" fontSize="25.3">{player.name}</text>
+            <text x="0" y="179" textAnchor="middle" fontSize="24.2" fill="#555">{player.rating}</text>
           </g>;
         })}
         <SmallChessboard className="first-game-board" y={playing?195:130} />
         <SmallChessboard className="second-game-board" y={370} />
-        <text className="play-chess-caption" x="280" y="444" textAnchor="middle" fontSize="26">{chessPlayers[selectedChessPair.i].shortName} vs {chessPlayers[selectedChessPair.j].shortName}</text>
+        <text className="play-chess-caption" x="280" y="444" textAnchor="middle" fontSize="28.6">{chessPlayers[selectedChessPair.i].shortName} vs {chessPlayers[selectedChessPair.j].shortName}</text>
       </svg>
       <div className="chess-score-table" role="table" aria-label="Previous comparison counts and computed disruption scores for all six pairs">
         <div className="chess-table-row chess-table-heading" role="row">

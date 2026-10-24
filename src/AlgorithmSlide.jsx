@@ -44,12 +44,12 @@ export function AlgorithmSlide({active,step}){
                 <path d="M-23-63 L-13-54 L0-70 L13-54 L23-63 L18-43 H-18 Z" fill="#efc349" stroke="#8b6818" strokeWidth="1.8" strokeLinejoin="round" />
                 <path d="M-18-39 H18" fill="none" stroke="#8b6818" strokeWidth="3" strokeLinecap="round" />
               </g>}
-              <text x="0" y="151" textAnchor="middle" fontSize="23">{player.name}</text>
-              <text x="0" y="180" textAnchor="middle" fontSize="27" fill={player.color}>{frame.ratings[index]}</text>
+              <text x="0" y="151" textAnchor="middle" fontSize="25.3">{player.name}</text>
+              <text x="0" y="180" textAnchor="middle" fontSize="29.7" fill={player.color}>{frame.ratings[index]}</text>
             </g>;
           })}
           <SmallChessboard className="walkthrough-board" y={210} />
-          <text x="280" y="194" textAnchor="middle" fontSize="21">{frame.pair?.length===2?frame.pair.map(i=>chessPlayers[i].shortName).join(' vs '):'Next comparison'}</text>
+          <text x="280" y="194" textAnchor="middle" fontSize="23.1">{frame.pair?.length===2?frame.pair.map(i=>chessPlayers[i].shortName).join(' vs '):'Next comparison'}</text>
         </svg>
         <div className="parwis-candidates" aria-label="Challenger disruption scores">
           {frame.scores.map(({j,score})=><span key={j} className={frame.pair?.[1]===j?'best-candidate':''}>{chessPlayers[j].shortName} <strong>{score.toFixed(4)}</strong></span>)}

@@ -114,15 +114,15 @@ function LossSurface({opposite=false, playing}) {
           <path d={path(samples.map(u=>project(u,fixed)))} />
         </React.Fragment>)}</g>
         <path d="M65 275 V165 M59 175 L65 165 L71 175" className="surface-loss-axis" />
-        <text x="49" y="153" fontSize="23">L(θ)</text>
+        <text x="49" y="153" fontSize="25.3">L(θ)</text>
         <circle cx={destination[0]} cy={destination[1]} r="5" fill="white" stroke={color} strokeWidth="1.5" opacity={shift} />
         <path d={path(trail)} fill="none" stroke={color} strokeWidth="3.3" strokeLinecap="round" />
         <circle cx={startPoint[0]} cy={startPoint[1]} r="5" fill="#000" />
-        <text x={startPoint[0]-16} y={startPoint[1]-14} fontSize="24">θ</text>
+        <text x={startPoint[0]-16} y={startPoint[1]-14} fontSize="26.4">θ</text>
         <circle className="moving-theta" cx={dot[0]} cy={dot[1]} r="8" fill={color} stroke="white" strokeWidth="2" />
-        {amount>.2&&<text x={dot[0]+(opposite?-27:16)} y={dot[1]+28} fontSize="23" fill={color}>θ⁺</text>}
+        {amount>.2&&<text x={dot[0]+(opposite?-27:16)} y={dot[1]+28} fontSize="25.3" fill={color}>θ⁺</text>}
       </g>
-      <text x="300" y="330" textAnchor="middle" fontSize="20">{status}</text>
+      <text x="300" y="330" textAnchor="middle" fontSize="22">{status}</text>
     </svg>
   </div>;
 }

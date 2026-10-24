@@ -15,9 +15,9 @@ function NetflixSigmoid({playing}) {
   <path d={path} fill="none" stroke="#b9090b" strokeWidth="3"/>
   <path d={`M45 ${y(probability)} H${x(difference)} V190`} fill="none" stroke="#b9090b" opacity=".45" strokeDasharray="4 4"/>
   <circle cx={x(difference)} cy={y(probability)} r="7" fill="#b9090b"/>
-  {[0,.5,1].map(p=><text key={p} x="34" y={y(p)+5} textAnchor="end" fontSize="16">{p}</text>)}
-  {[-4,-2,0,2,4].map(v=><text key={v} x={x(v)} y="215" textAnchor="middle" fontSize="16">{v}</text>)}
-  <text x="210" y="248" textAnchor="middle" fontSize="18">Δ = {difference.toFixed(2)} · σ(Δ) = {probability.toFixed(2)}</text>
+  {[0,.5,1].map(p=><text key={p} x="34" y={y(p)+5} textAnchor="end" fontSize="17.6">{p}</text>)}
+  {[-4,-2,0,2,4].map(v=><text key={v} x={x(v)} y="215" textAnchor="middle" fontSize="17.6">{v}</text>)}
+  <text x="210" y="248" textAnchor="middle" fontSize="19.8">Δ = {difference.toFixed(2)} · σ(Δ) = {probability.toFixed(2)}</text>
  </svg>;
 }
 function NetflixPipeline({step,active}) {
@@ -41,12 +41,12 @@ function NetflixPipeline({step,active}) {
 
 function RecoveryChart(){const {budgets,parwis,rucb}=netflixPaperRecovery;const x=b=>85+(b-100)/600*680,y=v=>335-v/20*280;
  return <svg className="netflix-recovery-chart" viewBox="0 0 860 420" role="img" aria-label="Netflix recovery fraction versus budget, approximately digitized from the paper: PARWiS rises from about 5 to 17 percent; RUCB from about 3 to 7 percent.">
-  {[0,5,10,15,20].map(v=><g key={v}><path d={`M85 ${y(v)} H765`} stroke="#ddd"/><text x="65" y={y(v)+6} textAnchor="end" fontSize="20">{v}</text></g>)}
+  {[0,5,10,15,20].map(v=><g key={v}><path d={`M85 ${y(v)} H765`} stroke="#ddd"/><text x="65" y={y(v)+6} textAnchor="end" fontSize="22">{v}</text></g>)}
   <path d="M85 45 V335 H765" fill="none" stroke="#555"/>
-  <text x="85" y="25" fontSize="22">Winner recovery (%) ↑</text>
-  {budgets.map(b=><text key={b} x={x(b)} y="366" textAnchor="middle" fontSize="20">{b}</text>)}
-  <text x="425" y="408" textAnchor="middle" fontSize="23">Comparison budget B</text>
-  {[[parwis,'#b9090b','PARWiS'],[rucb,'#b36818','RUCB']].map(([values,color,name])=><g key={name}><polyline className="netflix-result-line" points={values.map((v,i)=>`${x(budgets[i])},${y(v)}`).join(' ')} fill="none" stroke={color} strokeWidth="4"/>{values.map((v,i)=><circle key={i} cx={x(budgets[i])} cy={y(v)} r="5" fill={color}/>)}<text x="786" y={y(values.at(-1))+6} fontSize="20" fill={color}>{name}</text></g>)}
+  <text x="85" y="25" fontSize="24.2">Winner recovery (%) ↑</text>
+  {budgets.map(b=><text key={b} x={x(b)} y="366" textAnchor="middle" fontSize="22">{b}</text>)}
+  <text x="425" y="408" textAnchor="middle" fontSize="25.3">Comparison budget B</text>
+  {[[parwis,'#b9090b','PARWiS'],[rucb,'#b36818','RUCB']].map(([values,color,name])=><g key={name}><polyline className="netflix-result-line" points={values.map((v,i)=>`${x(budgets[i])},${y(v)}`).join(' ')} fill="none" stroke={color} strokeWidth="4"/>{values.map((v,i)=><circle key={i} cx={x(budgets[i])} cy={y(v)} r="5" fill={color}/>)}<text x="786" y={y(values.at(-1))+6} fontSize="22" fill={color}>{name}</text></g>)}
  </svg>;
 }
 export function NetflixSlide({active,step}){
