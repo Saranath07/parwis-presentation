@@ -246,7 +246,7 @@ function ModellingSlide({active, step: reveal, bridgeOnly = false}) {
   return (
     <section className={`modelling-slide slide ${bridgeOnly ? 'bridge-slide' : ''} ${active ? 'active' : ''} ${step >= 7 ? 'bridge-active' : ''} ${step >= 9 ? 'uncertainty-revealed' : ''}`} aria-label="BTL modelling and lecture recap" data-step={step} aria-hidden={!active} inert={!active}>
       <h2 aria-hidden={step >= 7}>{reveal<=2?'Active ranking: the setup':'Modelling noisy comparisons'}</h2>
-      <div className={`modelling-stage ${reveal<=2?'formal-setup-stage':''} ${reveal===2?'budget-focused':''}`}>
+      <div className={`modelling-stage ${reveal<=2?'formal-setup-stage':''} ${reveal===2?'budget-focused':''} ${reveal>=3?'lecture-stage':''}`}>
         <SetupVisuals reveal={reveal} />
         <div className={`btl-block ${reveal<1?'setup-btl-hidden':''} ${step >= 1 ? 'at-top' : ''}`} aria-hidden={reveal<1||step >= 7}>
           <h3>BTL assumption</h3>

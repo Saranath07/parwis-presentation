@@ -1236,3 +1236,13 @@ p { margin: 0; }
 .formal-setup-stage.budget-focused .btl-animation-wrapper { margin-top:14px; }
 .formal-setup-stage.budget-focused .sigmoid-equation { font-size:10px; }
 @media(max-width:650px) { .formal-setup-stage.budget-focused .btl-block { left:86%; width:25%; } .formal-setup-stage.budget-focused .btl-block h3 { font-size:14px; } .formal-setup-stage.budget-focused .btl-block > .equation { font-size:10px; } .formal-setup-stage.budget-focused .sigmoid-equation { font-size:7px; } }
+
+/* Clear the setup before the lecture recap, without enlarging the exiting plot. */
+.formal-setup-items.setup-dismissed,.formal-setup-budget.setup-dismissed {
+ transition:opacity 180ms ease,visibility 0s 180ms;
+}
+.lecture-stage .btl-animation-wrapper { display:none; }
+.lecture-stage .btl-block {
+ transition:left 650ms cubic-bezier(.22,1,.36,1),width 650ms cubic-bezier(.22,1,.36,1),top 650ms cubic-bezier(.22,1,.36,1),opacity 450ms ease,visibility 450ms;
+}
+.lecture-stage .lecture-intro.visible { transition-delay:250ms; }
