@@ -1183,7 +1183,7 @@ p { margin: 0; }
 .netflix-poster-probability span { display:block; margin-top:7px; font-size:clamp(12px,1.1vw,17px); color:#666; }
 @media(max-width:650px) { .netflix-oracle-movie { width:75px; } .netflix-poster-probability { font-size:26px; } }
 
-.challenger-paper-preview { display:block; height:145px; width:auto; max-width:100%; margin:auto; border:1px solid #bbb; box-shadow:3px 3px 0 #eee; }
+.challenger-paper-preview { display:block; height:120px; width:auto; max-width:100%; margin:auto; border:1px solid #bbb; box-shadow:3px 3px 0 #eee; }
 .challenger-option > .challenger-paper-title { margin:10px 0 0; font-size:28px; }
 .challenger-paper-details { margin-top:9px; font-size:18px; line-height:1.4; }
 .challenger-paper-details p { margin:4px 0; }
