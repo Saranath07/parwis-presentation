@@ -273,9 +273,9 @@ function ModellingSlide({active, step: reveal, bridgeOnly = false}) {
 
 function App() {
   const [stage, setStage] = useState(0);
-  const slideNumber = stage === 0 ? 1 : stage <= 3 ? 2 : stage <= 11 ? 3 : stage <= 23 ? 4 : stage <= 27 ? 5 : stage <= 32 ? 6 : stage <= 36 ? 7 : stage <= 39 ? 8 : stage < MARKOV_START ? 9 : stage < CHESS_START ? 10 : stage < ALGORITHM_START ? 11 : stage < NETFLIX_START ? 12 : stage < RESULTS_START ? 13 : stage < LAST_STAGE ? 14 : 15;
-  const next = () => setStage(value => Math.min(LAST_STAGE, value + 1));
-  const previous = () => setStage(value => Math.max(0, value - 1));
+  const slideNumber = stage === 0 ? 1 : stage <= 11 ? 2 : stage <= 23 ? 3 : stage <= 27 ? 4 : stage <= 32 ? 5 : stage <= 36 ? 6 : stage <= 39 ? 7 : stage < MARKOV_START ? 8 : stage < CHESS_START ? 9 : stage < ALGORITHM_START ? 10 : stage < NETFLIX_START ? 11 : stage < RESULTS_START ? 12 : stage < LAST_STAGE ? 13 : 14;
+  const next = () => setStage(value => value === 0 ? 4 : Math.min(LAST_STAGE, value + 1));
+  const previous = () => setStage(value => value <= 4 ? 0 : value - 1);
 
   useEffect(() => {
     async function handleKeyDown(event) {
@@ -285,10 +285,10 @@ function App() {
 
       if (['ArrowRight', ' '].includes(event.key)) {
         event.preventDefault();
-        setStage(value => Math.min(LAST_STAGE, value + 1));
+        setStage(value => value === 0 ? 4 : Math.min(LAST_STAGE, value + 1));
       } else if (event.key === 'ArrowLeft') {
         event.preventDefault();
-        setStage(value => Math.max(0, value - 1));
+        setStage(value => value <= 4 ? 0 : value - 1);
       } else if (event.key.toLowerCase() === 'f' && !event.repeat) {
         event.preventDefault();
         try {
@@ -306,7 +306,6 @@ function App() {
   return (
     <main className="presentation">
       <OpeningSlide active={stage === 0} />
-      <ProblemSlide active={stage >= 1 && stage <= 3} revealed={stage >= 2} noisy={stage >= 3} />
       <ModellingSlide active={stage >= 4 && stage <= 11} step={Math.max(0, Math.min(stage - 4, 7))} />
       <ModellingSlide bridgeOnly active={stage >= 24 && stage <= 27} step={Math.max(9, Math.min(stage - 15, 12))} />
       <RucbRecapSlide active={stage >= 12 && stage <= 23} step={stage - 12} />
@@ -323,7 +322,7 @@ function App() {
         <p className="questions-presenters">Saranath P &amp; Srividhya Sethuraman</p>
         <p className="questions-paper">PARWiS · ICDM 2021</p>
       </section>
-      <div className="presentation-page-number" aria-label={`Slide ${slideNumber} of 15`}>{slideNumber} / 15</div>
+      <div className="presentation-page-number" aria-label={`Slide ${slideNumber} of 14`}>{slideNumber} / 14</div>
       <nav className="slide-controls" aria-label="Presentation navigation">
         <button onClick={previous} disabled={stage === 0} aria-label="Previous reveal or slide">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12 H5 M11 6 L5 12 L11 18" /></svg>
