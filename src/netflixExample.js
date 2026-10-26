@@ -21,3 +21,12 @@ export const netflixPaperRecovery={
  parwis:[4.8,8.8,12.3,12.8,15.2,15.2,17.0],
  rucb:[3.0,3.7,4.0,4.4,5.4,5.8,6.8],
 };
+
+// Approximate Figure 3 Netflix means, read from the original plot crops:
+// public/experiments/baselines-netflix-{reported,true}.png.
+// No raw author measurements or reconstructed error bars are implied.
+export const netflixPaperRanks={
+ budgets:[100,200,300,400,500,600,700],
+ reported:{parwis:[33.2,15.8,13.0,11.5,10.9,10.0,9.3],rucb:[36.1,30.5,27.6,26.8,22.7,21.1,19.6]},
+ true:{parwis:[35.5,34.5,32.0,29.3,27.3,25.5,23.7],rucb:[40.2,36.2,34.0,31.8,28.6,27.1,25.1]},
+};

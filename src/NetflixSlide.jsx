@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import katex from 'katex';
-import {netflixMovies,netflixRatings,netflixWeights,exampleRatingDifference,exampleWinProbability,netflixPaperRecovery} from './netflixExample.js';
+import {netflixMovies,netflixRatings,netflixWeights,exampleRatingDifference,exampleWinProbability,netflixPaperRecovery,netflixPaperRanks} from './netflixExample.js';
 function MathLine({tex}){return <div className="netflix-equation" dangerouslySetInnerHTML={{__html:katex.renderToString(tex,{displayMode:true,throwOnError:true})}}/>;}
 function Movie({index,score=false}){const m=netflixMovies[index];return <div className="netflix-movie"><img className="netflix-cover" src={`${import.meta.env.BASE_URL}netflix/${m.posterFile}`} alt={`${m.title} theatrical release poster`}/><h3>{m.title}</h3><p>{score?`BTL score ${(100*netflixWeights[index]).toFixed(1)}`:m.year}</p></div>;}
 
@@ -41,19 +41,42 @@ function NetflixPipeline({step,active}) {
 
 function RecoveryChart(){const {budgets,parwis,rucb}=netflixPaperRecovery;const x=b=>85+(b-100)/600*680,y=v=>335-v/20*280;
  return <svg className="netflix-recovery-chart" viewBox="0 0 860 420" role="img" aria-label="Netflix recovery fraction versus budget, approximately digitized from the paper: PARWiS rises from about 5 to 17 percent; RUCB from about 3 to 7 percent.">
-  {[0,5,10,15,20].map(v=><g key={v}><path d={`M85 ${y(v)} H765`} stroke="#ddd"/><text x="65" y={y(v)+6} textAnchor="end" fontSize="22">{v}</text></g>)}
+  {[0,5,10,15,20].map(v=><g key={v}><path d={`M85 ${y(v)} H765`} stroke="#ddd"/><text x="65" y={y(v)+6} textAnchor="end" fontSize="26">{v}</text></g>)}
   <path d="M85 45 V335 H765" fill="none" stroke="#555"/>
   <text x="85" y="25" fontSize="24.2">Winner recovery (%) ↑</text>
-  {budgets.map(b=><text key={b} x={x(b)} y="366" textAnchor="middle" fontSize="22">{b}</text>)}
-  <text x="425" y="408" textAnchor="middle" fontSize="25.3">Comparison budget B</text>
-  {[[parwis,'#b9090b','PARWiS'],[rucb,'#b36818','RUCB']].map(([values,color,name])=><g key={name}><polyline className="netflix-result-line" points={values.map((v,i)=>`${x(budgets[i])},${y(v)}`).join(' ')} fill="none" stroke={color} strokeWidth="4"/>{values.map((v,i)=><circle key={i} cx={x(budgets[i])} cy={y(v)} r="5" fill={color}/>)}<text x="786" y={y(values.at(-1))+6} fontSize="22" fill={color}>{name}</text></g>)}
+  {budgets.map(b=><text key={b} x={x(b)} y="366" textAnchor="middle" fontSize="26">{b}</text>)}
+  <text x="425" y="408" textAnchor="middle" fontSize="28">Comparison budget B</text>
+  {[[parwis,'#b9090b','PARWiS'],[rucb,'#b36818','RUCB']].map(([values,color,name])=><g key={name}><polyline className="netflix-result-line" points={values.map((v,i)=>`${x(budgets[i])},${y(v)}`).join(' ')} fill="none" stroke={color} strokeWidth="4"/>{values.map((v,i)=><circle key={i} cx={x(budgets[i])} cy={y(v)} r="5" fill={color}/>)}<text x="786" y={y(values.at(-1))+6} fontSize="26" fill={color}>{name}</text></g>)}
  </svg>;
 }
+
+function ResultLegend(){return <div className="netflix-results-legend"><span>● PARWiS</span><span>● RUCB</span></div>;}
+function RecoveryResults(){return <div className="netflix-recovery-view">
+ <div className="netflix-recovery-definition"><MathLine tex={String.raw`\operatorname{Recovery}(B)=\frac1R\sum\nolimits_{r=1}^{R}\mathbf 1\!\left\{\widehat i_r(B)=i^\star\right\}`}/><p><MathInline tex="R"/> independent runs · <MathInline tex="i^\star"/>: true winner · <MathInline tex={String.raw`\widehat i_r(B)`}/>: winner returned in run <MathInline tex="r"/>. The plot shows this fraction × 100%.</p></div>
+ <div className="netflix-results"><div className="netflix-results-plot"><ResultLegend/><RecoveryChart/></div><aside><span className="netflix-result-kicker">Netflix Prize · 100 movies</span><p>At <strong>B = 700</strong> comparisons:</p><div className="netflix-number-result"><span>PARWiS</span><strong>≈17%</strong></div><div className="netflix-number-result rucb"><span>RUCB</span><strong>≈7%</strong></div><p className="netflix-result-limit">Higher is better; both remain below 20%.</p></aside></div>
+ </div>;}
+function MathInline({tex}){return <span dangerouslySetInnerHTML={{__html:katex.renderToString(tex,{throwOnError:true})}}/>;}
+function RankChart({metric}){
+ const {budgets}=netflixPaperRanks,series=netflixPaperRanks[metric],low=metric==='reported'?0:20,high=metric==='reported'?50:45;
+ const ticks=metric==='reported'?[0,10,20,30,40,50]:[20,25,30,35,40,45];
+ const x=b=>72+(b-100)/600*490,y=v=>300-(v-low)/(high-low)*250;
+ return <svg className="netflix-rank-chart" viewBox="0 0 620 380" role="img" aria-label={`${metric==='reported'?'True rank of the reported winner':'Reported rank of the true winner'} on Netflix, approximate means from Figure 3; PARWiS and RUCB only`}>
+  {ticks.map(v=><g key={v}><path d={`M72 ${y(v)} H562`} stroke="#ddd"/><text x="56" y={y(v)+7} textAnchor="end" fontSize="23">{v}</text></g>)}
+  <path d="M72 50 V300 H562" fill="none" stroke="#555"/><text x="72" y="29" fontSize="24">Mean rank ↓</text>
+  {budgets.map(b=><text key={b} x={x(b)} y="330" textAnchor="middle" fontSize="23">{b}</text>)}
+  <text x="315" y="373" textAnchor="middle" fontSize="25">Comparison budget B</text>
+  {[[series.parwis,'#b9090b','PARWiS'],[series.rucb,'#b36818','RUCB']].map(([values,color,name])=><g key={name}><polyline points={values.map((v,i)=>`${x(budgets[i])},${y(v)}`).join(' ')} fill="none" stroke={color} strokeWidth="4"/>{values.map((v,i)=><circle key={i} cx={x(budgets[i])} cy={y(v)} r="5" fill={color}/>)}</g>)}
+ </svg>;
+}
+function RankingResults(){return <div className="netflix-ranking-view"><ResultLegend/><div className="netflix-rank-grid">
+ <figure><figcaption>True rank of the reported winner</figcaption><p>How good is the movie we chose?</p><RankChart metric="reported"/></figure>
+ <figure><figcaption>Reported rank of the true winner</figcaption><p>Where did the best movie end up?</p><RankChart metric="true"/></figure>
+ </div><p className="netflix-rank-takeaway">Lower is better. PARWiS has lower mean ranks in this Netflix experiment.</p></div>;}
 export function NetflixSlide({active,step}){
- const [trial,setTrial]=useState(0),[draw,setDraw]=useState(.24),[original,setOriginal]=useState(false);
+ const [trial,setTrial]=useState(0),[draw,setDraw]=useState(.24);
  useEffect(()=>{if(!active||step!==4)return;setTrial(0);setDraw(Math.random());if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;const t=setInterval(()=>{setTrial(v=>v+1);setDraw(Math.random());},2500);return()=>clearInterval(t);},[active,step]);
  const firstWins=draw<exampleWinProbability;const outcome=firstWins?0:2;
- const title=step===0?'What do the movie ratings look like?':step<=3?'From ratings to a comparison model':step===4?'The model becomes a noisy game oracle':'Netflix: PARWiS versus RUCB';
+ const title=step===0?'What do the movie ratings look like?':step<=3?'From ratings to a comparison model':step===4?'The model becomes a noisy game oracle':step===5?'Netflix: PARWiS versus RUCB':'Netflix: how good is the reported ranking?';
  const tab=step===0?0:step<=3?1:step===4?2:3;
  return <section className={`slide netflix-slide ${active?'active':''}`} aria-label="Netflix dataset and PARWiS versus RUCB" aria-hidden={!active} inert={!active} data-step={step}>
   <header className="netflix-retro-header"><img src={`${import.meta.env.BASE_URL}netflix/netflix-2001.svg`} alt="Historical Netflix logo"/><span>Movie ratings. Pairwise games. One winner.</span></header>
@@ -63,8 +86,8 @@ export function NetflixSlide({active,step}){
    {step===0?<>
     <div className="netflix-catalogue"><div className="netflix-shelf">{netflixMovies.map((_,i)=><Movie key={i} index={i}/>)}</div><p className="netflix-example-label">Tamil titles and ratings below are an illustrative example.</p></div>
     <div className="netflix-ratings"><h3>What a ratings dataset contains</h3><table><thead><tr><th>User</th>{netflixMovies.map(m=><th key={m.title}>{m.title}</th>)}</tr></thead><tbody>{netflixRatings.map((row,i)=><tr key={i}><th>U0{i+1}</th>{row.map((v,j)=><td key={j}>{v}<span className="rating-star">★</span></td>)}</tr>)}</tbody></table><p>Each record: user · movie · rating (1–5) · date</p><strong>Paper: keep the 100 most-rated movies.</strong></div>
-   </>:step>=1&&step<=3?<NetflixPipeline step={step} active={active}/>:step===4?<div className="netflix-oracle"><div style={{'--poster-scale':1}} className={`netflix-oracle-movie ${firstWins?'oracle-winner':''}`}><Movie index={0} score/><p className="netflix-poster-probability">{(100*exampleWinProbability).toFixed(0)}%<span>chance of winning</span></p>{firstWins&&<span className="netflix-outcome-badge">Wins this draw</span>}</div><div className="netflix-oracle-center"><span className="netflix-query-tag">PARWiS or RUCB chooses a pair</span><h3>“Compare these two movies.”</h3><MathLine tex={String.raw`Y\sim\operatorname{Bernoulli}\!\left(\frac{w_i}{w_i+w_j}\right)`}/><div key={trial} className="netflix-oracle-output">Outcome {trial+1}: <strong>{netflixMovies[outcome].title}</strong> wins</div><p className="netflix-oracle-caption">The same pair can produce different answers.<br/>Each answer spends one comparison from B.</p></div><div style={{'--poster-scale':Math.sqrt((1-exampleWinProbability)/exampleWinProbability)}} className={`netflix-oracle-movie ${!firstWins?'oracle-winner':''}`}><Movie index={2} score/><p className="netflix-poster-probability">{(100*(1-exampleWinProbability)).toFixed(0)}%<span>chance of winning</span></p>{!firstWins&&<span className="netflix-outcome-badge">Wins this draw</span>}</div></div>:<div className="netflix-results"><div className="netflix-results-plot"><div className="netflix-results-legend"><span>● PARWiS</span><span>● RUCB</span></div>{original?<img className="netflix-original-plot" src={`${import.meta.env.BASE_URL}experiments/baselines-netflix-recovery.png`} alt="Original Figure 3 Netflix winner-recovery plot with all six baselines and error bars"/>:<RecoveryChart/>}<button className="netflix-original-toggle" onClick={()=>setOriginal(v=>!v)}>{original?'Show PARWiS vs RUCB':'View original paper plot'}</button></div><aside><span className="netflix-result-kicker">Paper’s Netflix experiment · N = 100</span><h3>Small budgets.<br/>Different recovery.</h3><p>At <strong>B = 700</strong> comparisons:</p><div className="netflix-number-result"><span>PARWiS</span><strong>≈17%</strong></div><div className="netflix-number-result rucb"><span>RUCB</span><strong>≈7%</strong></div><p className="netflix-result-limit">Higher recovery in this experiment; absolute recovery is still low.</p></aside></div>}
+   </>:step>=1&&step<=3?<NetflixPipeline step={step} active={active}/>:step===4?<div className="netflix-oracle"><div style={{'--poster-scale':1}} className={`netflix-oracle-movie ${firstWins?'oracle-winner':''}`}><Movie index={0} score/><p className="netflix-poster-probability">{(100*exampleWinProbability).toFixed(0)}%<span>chance of winning</span></p>{firstWins&&<span className="netflix-outcome-badge">Wins this draw</span>}</div><div className="netflix-oracle-center"><span className="netflix-query-tag">PARWiS or RUCB chooses a pair</span><h3>“Compare these two movies.”</h3><MathLine tex={String.raw`Y\sim\operatorname{Bernoulli}\!\left(\frac{w_i}{w_i+w_j}\right)`}/><div key={trial} className="netflix-oracle-output">Outcome {trial+1}: <strong>{netflixMovies[outcome].title}</strong> wins</div><p className="netflix-oracle-caption">The same pair can produce different answers.<br/>Each answer spends one comparison from B.</p></div><div style={{'--poster-scale':Math.sqrt((1-exampleWinProbability)/exampleWinProbability)}} className={`netflix-oracle-movie ${!firstWins?'oracle-winner':''}`}><Movie index={2} score/><p className="netflix-poster-probability">{(100*(1-exampleWinProbability)).toFixed(0)}%<span>chance of winning</span></p>{!firstWins&&<span className="netflix-outcome-badge">Wins this draw</span>}</div></div>:step===5?<RecoveryResults/>:<RankingResults/>}
   </div>
-  <footer className="netflix-footnote">{step===5?<><strong>Source: PARWiS, Figure 3, Netflix Prize.</strong> Two-series means approximately digitized from the plot; error bars are in the original. These are not fresh experiment runs.</>:<>Paper’s pipeline: PARWiS §V-E and authors’ <a href="https://github.com/DevSheth/active-ranking-under-shoe-string-budget/blob/master/datasets/netflix.py" target="_blank" rel="noreferrer">Netflix preprocessing</a>. Tamil films, ratings and draws are illustrative; the reported experiment uses its own fitted BTL model.</>}</footer>
+  <footer className="netflix-footnote">{step>=5?<><strong>PARWiS · Figure 3 · Netflix Prize.</strong> Approximate means digitized from the paper; original error bars omitted. Not new runs. <a href={`${import.meta.env.BASE_URL}experiments/baselines-netflix-${step===5?'recovery':'reported'}.png`} target="_blank" rel="noreferrer">Original plot</a>.</>:<>Paper’s pipeline: PARWiS §V-E and authors’ <a href="https://github.com/DevSheth/active-ranking-under-shoe-string-budget/blob/master/datasets/netflix.py" target="_blank" rel="noreferrer">Netflix preprocessing</a>. Tamil films, ratings and draws are illustrative; the reported experiment uses its own fitted BTL model.</>}</footer>
  </section>;
 }

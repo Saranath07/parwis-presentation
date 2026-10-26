@@ -1327,3 +1327,49 @@ p { margin: 0; }
  .comparison-story .favourite-anchor { margin-top:20px; }
  .comparison-story .challenger-options { margin-top:24px; }
 }
+
+/* Netflix-only results, with a definition before the recovery curves. */
+.netflix-recovery-view { width:100%; min-height:0; display:flex; flex-direction:column; gap:18px; }
+.netflix-recovery-definition { text-align:center; }
+.netflix-recovery-definition .netflix-equation { font-size:clamp(26px,2.5vw,36px); }
+.netflix-recovery-definition .katex-display { margin:.2em 0; }
+.netflix-recovery-definition > p { font-size:clamp(17px,1.4vw,21px); line-height:1.5; margin:10px auto 0; max-width:1100px; }
+.netflix-recovery-view .netflix-results { gap:30px; }
+.netflix-recovery-view .netflix-recovery-chart { max-height:37vh; }
+.netflix-recovery-view .netflix-results aside h3 { font-size:clamp(28px,2.7vw,40px); line-height:1.3; margin:10px 0 20px; }
+.netflix-ranking-view { width:100%; text-align:center; }
+.netflix-rank-grid { display:grid; grid-template-columns:1fr 1fr; gap:35px; margin-top:18px; }
+.netflix-rank-grid figure { min-width:0; margin:0; }
+.netflix-rank-grid figcaption { font-size:clamp(25px,2.2vw,34px); line-height:1.3; }
+.netflix-rank-grid figure > p { font-size:clamp(19px,1.5vw,24px); color:#555; margin:10px 0 12px; }
+.netflix-rank-chart { width:100%; max-height:42vh; display:block; }
+.netflix-rank-takeaway { font-size:clamp(23px,2vw,30px); margin:22px 0 0; line-height:1.4; }
+@media(max-height:760px) and (min-width:651px) {
+ .netflix-recovery-view { gap:10px; }
+ .netflix-recovery-view .netflix-results-legend { font-size:25px; }
+ .netflix-recovery-view .netflix-recovery-chart { max-height:32vh; }
+ .netflix-recovery-view .netflix-number-result { margin:10px 0; }
+ .netflix-recovery-view .netflix-results aside h3 { font-size:28px; margin:6px 0 12px; }
+ .netflix-recovery-view .netflix-result-limit { margin-top:12px; }
+ .netflix-rank-grid { gap:22px; margin-top:12px; }
+ .netflix-rank-grid figcaption { font-size:25px; }
+ .netflix-rank-chart { max-height:35vh; }
+ .netflix-rank-takeaway { margin-top:12px; }
+}
+@media(max-width:650px) {
+ .netflix-recovery-definition .netflix-equation { font-size:18px; }
+ .netflix-recovery-definition > p { font-size:12px; }
+ .netflix-rank-grid { gap:12px; }
+ .netflix-rank-grid figcaption { font-size:17px; }
+ .netflix-rank-grid figure > p { font-size:13px; }
+ .netflix-rank-takeaway { font-size:17px; }
+}
+
+.netflix-footnote { left:9%; right:12%; }
+
+@media(max-height:760px) and (min-width:651px) {
+ .netflix-recovery-view .netflix-recovery-chart { max-height:40vh; }
+ .netflix-recovery-view .netflix-number-result strong { font-size:48px; }
+ .netflix-recovery-view .netflix-results aside > p { margin:10px 0; }
+ .netflix-recovery-view .netflix-results-plot { align-self:center; }
+}

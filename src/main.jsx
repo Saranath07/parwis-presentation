@@ -9,7 +9,6 @@ import {ChessSelectionSlide} from './ChessSelectionSlide.jsx';
 import {AlgorithmSlide} from './AlgorithmSlide.jsx';
 import {DisruptionMeasuresSlide} from './DisruptionMeasuresSlide.jsx';
 import {MarkovDisruptionSlide} from './MarkovDisruptionSlide.jsx';
-import {ExperimentsSlide} from './ExperimentsSlide.jsx';
 import {NetflixSlide} from './NetflixSlide.jsx';
 import {RucbRecapSlide} from './RucbRecapSlide.jsx';
 import {walkthroughFrames} from './parwisWalkthrough.js';
@@ -17,10 +16,9 @@ const MEASURES_START = 40;
 const MARKOV_START = MEASURES_START + 4;
 const CHESS_START = MARKOV_START + 3;
 const ALGORITHM_START = CHESS_START + 4;
-const EXPERIMENTS_START = ALGORITHM_START + walkthroughFrames.length;
-const NETFLIX_START = EXPERIMENTS_START + 1;
+const NETFLIX_START = ALGORITHM_START + walkthroughFrames.length;
 const RESULTS_START = NETFLIX_START + 6;
-const LAST_STAGE = RESULTS_START + 3;
+const LAST_STAGE = RESULTS_START + 1;
 
 function OpeningSlide({active}) {
 
@@ -275,7 +273,7 @@ function ModellingSlide({active, step: reveal, bridgeOnly = false}) {
 
 function App() {
   const [stage, setStage] = useState(0);
-  const slideNumber = stage === 0 ? 1 : stage <= 3 ? 2 : stage <= 11 ? 3 : stage <= 23 ? 4 : stage <= 27 ? 5 : stage <= 32 ? 6 : stage <= 36 ? 7 : stage <= 39 ? 8 : stage < MARKOV_START ? 9 : stage < CHESS_START ? 10 : stage < ALGORITHM_START ? 11 : stage < EXPERIMENTS_START ? 12 : stage < NETFLIX_START ? 13 : stage < RESULTS_START ? 14 : stage < LAST_STAGE ? 15 : 16;
+  const slideNumber = stage === 0 ? 1 : stage <= 3 ? 2 : stage <= 11 ? 3 : stage <= 23 ? 4 : stage <= 27 ? 5 : stage <= 32 ? 6 : stage <= 36 ? 7 : stage <= 39 ? 8 : stage < MARKOV_START ? 9 : stage < CHESS_START ? 10 : stage < ALGORITHM_START ? 11 : stage < NETFLIX_START ? 12 : stage < RESULTS_START ? 13 : stage < LAST_STAGE ? 14 : 15;
   const next = () => setStage(value => Math.min(LAST_STAGE, value + 1));
   const previous = () => setStage(value => Math.max(0, value - 1));
 
@@ -318,15 +316,14 @@ function App() {
       <DisruptionMeasuresSlide active={stage >= MEASURES_START && stage < MARKOV_START} step={stage - MEASURES_START} />
       <MarkovDisruptionSlide active={stage >= MARKOV_START && stage < CHESS_START} step={stage - MARKOV_START} />
       <ChessSelectionSlide active={stage >= CHESS_START && stage < ALGORITHM_START} step={stage - CHESS_START} />
-      <AlgorithmSlide active={stage >= ALGORITHM_START && stage < EXPERIMENTS_START} step={stage - ALGORITHM_START} />
-      <ExperimentsSlide active={stage === EXPERIMENTS_START || (stage >= RESULTS_START && stage < LAST_STAGE)} step={stage === EXPERIMENTS_START ? 0 : stage - RESULTS_START + 1} />
-      <NetflixSlide active={stage >= NETFLIX_START && stage < RESULTS_START} step={stage - NETFLIX_START} />
+      <AlgorithmSlide active={stage >= ALGORITHM_START && stage < NETFLIX_START} step={stage - ALGORITHM_START} />
+      <NetflixSlide active={stage >= NETFLIX_START && stage < LAST_STAGE} step={stage - NETFLIX_START} />
       <section className={`slide questions-slide ${stage === LAST_STAGE ? 'active' : ''}`} aria-label="Questions" aria-hidden={stage !== LAST_STAGE} inert={stage !== LAST_STAGE}>
         <h2>Questions?</h2>
         <p className="questions-presenters">Saranath P &amp; Srividhya Sethuraman</p>
         <p className="questions-paper">PARWiS · ICDM 2021</p>
       </section>
-      <div className="presentation-page-number" aria-label={`Slide ${slideNumber} of 16`}>{slideNumber} / 16</div>
+      <div className="presentation-page-number" aria-label={`Slide ${slideNumber} of 15`}>{slideNumber} / 15</div>
       <nav className="slide-controls" aria-label="Presentation navigation">
         <button onClick={previous} disabled={stage === 0} aria-label="Previous reveal or slide">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12 H5 M11 6 L5 12 L11 18" /></svg>
