@@ -1373,3 +1373,16 @@ p { margin: 0; }
  .netflix-recovery-view .netflix-results aside > p { margin:10px 0; }
  .netflix-recovery-view .netflix-results-plot { align-self:center; }
 }
+@media(min-width:651px) {
+ .staged-model-flow .mini-pair .netflix-movie { width:220px; }
+ .staged-model-flow .model-parked-left .mini-pair .netflix-movie { width:90px; }
+ .netflix-score-bars > div { grid-template-columns:165px 1fr 45px; }
+}
+@media(max-height:760px) and (min-width:651px) {
+ .netflix-score-bars > div { margin:10px 0; }
+ .staged-model-flow .model-fit-panel { top:49%; }
+}
+@media(max-height:760px) and (min-width:651px) {
+ .netflix-score-bars > div { margin:4px 0; }
+ .staged-model-flow .model-fit-panel .netflix-equation .katex-display { margin:.15em 0; }
+}

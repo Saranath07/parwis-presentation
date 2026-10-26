@@ -22,5 +22,23 @@
     "page": "https://en.wikipedia.org/wiki/Ghilli",
     "image": "https://upload.wikimedia.org/wikipedia/en/1/13/Ghilli_poster.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
     "file": "public/netflix/ghilli-poster.jpg"
+  },
+  {
+    "title": "Mouna Ragam",
+    "page": "https://en.wikipedia.org/wiki/Mouna_Ragam",
+    "image": "https://upload.wikimedia.org/wikipedia/en/8/87/Mouna_Ragam_poster.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail_unscaled",
+    "file": "public/netflix/mouna-ragam-poster.jpg"
+  },
+  {
+    "title": "Mudhal Mariyadhai",
+    "page": "https://en.wikipedia.org/wiki/Muthal_Mariyathai",
+    "image": "https://upload.wikimedia.org/wikipedia/en/d/de/Muthal_Mariyathai.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail_unscaled",
+    "file": "public/netflix/mudhal-mariyadhai-poster.jpg"
+  },
+  {
+    "title": "Thillu Mullu",
+    "page": "https://en.wikipedia.org/wiki/Thillu_Mullu",
+    "image": "https://upload.wikimedia.org/wikipedia/en/e/ef/Thillu_Mullu_poster.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail_unscaled",
+    "file": "public/netflix/thillu-mullu-poster.jpg"
   }
 ]

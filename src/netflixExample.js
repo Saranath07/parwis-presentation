@@ -1,9 +1,9 @@
 // Teaching example: these Tamil titles/ratings are NOT Netflix Prize records.
 export const netflixMovies=[
  {title:'Nayakan',year:1987,posterFile:'nayakan-poster.jpg'},
- {title:'Padayappa',year:1999,posterFile:'padayappa-poster.jpg'},
- {title:'Anbe Sivam',year:2003,posterFile:'anbe-sivam-poster.jpg'},
- {title:'Ghilli',year:2004,posterFile:'ghilli-poster.jpg'},
+ {title:'Mouna Ragam',year:1986,posterFile:'mouna-ragam-poster.jpg'},
+ {title:'Mudhal Mariyadhai',year:1985,posterFile:'mudhal-mariyadhai-poster.jpg'},
+ {title:'Thillu Mullu',year:1981,posterFile:'thillu-mullu-poster.jpg'},
 ];
 export const netflixRatings=[[5,4,3,2],[4,3,5,4],[5,4,4,2],[4,5,2,3]];
 const means=netflixMovies.map((_,j)=>netflixRatings.reduce((s,row)=>s+row[j],0)/netflixRatings.length);

@@ -26,7 +26,7 @@ function NetflixPipeline({step,active}) {
    <span className="netflix-flow-number">1</span><h3>Rating differences</h3><div className="mini-pair"><Movie index={0}/><Movie index={2}/></div>
    <MathLine tex={String.raw`\Delta_{ij}=\operatorname{mean}_{u}(r_{ui}-r_{uj})`}/>
    <div className="netflix-rating-definition"><MathLine tex={String.raw`r_{ui}:\text{ user }u\text{'s rating of movie }i`}/><MathLine tex={String.raw`r_{uj}:\text{ the same user's rating of movie }j`}/></div>
-   <p className="netflix-rating-example">U01: Nayakan 5, Anbe Sivam 3 → difference 2.</p><small>Average over users who rated both. Here: {exampleRatingDifference.toFixed(1)}.</small>
+   <p className="netflix-rating-example">U01: {netflixMovies[0].title} 5, {netflixMovies[2].title} 3 → difference 2.</p><small>Average over users who rated both. Here: {exampleRatingDifference.toFixed(1)}.</small>
   </article>
   <article className={`model-probability-panel ${step>=2?'model-panel-visible':''} ${step>=3?'model-parked-right':''}`} aria-hidden={step<2}>
    <span className="netflix-flow-number">2</span><h3>Pairwise probabilities</h3><NetflixSigmoid playing={active&&step>=2}/>
@@ -34,7 +34,7 @@ function NetflixPipeline({step,active}) {
   </article>
   <article className={`model-fit-panel ${step>=3?'model-panel-visible':''}`} aria-hidden={step<3}>
    <span className="netflix-flow-number">3</span><h3>Fit BTL scores</h3><div className="netflix-score-bars">{netflixMovies.map((m,i)=><div key={m.title}><span>{m.title}</span><i style={{width:`${netflixWeights[i]*150}%`,animationDelay:`${i*110}ms`}}/><strong>{(netflixWeights[i]*100).toFixed(1)}</strong></div>)}</div>
-   <p>Fit one global score vector using spectral ranking.</p><MathLine tex={String.raw`P_{ij}^{\mathrm{BTL}}=\frac{w_i}{w_i+w_j}`}/><small>These fitted scores define the experimental winner.</small>
+   <p>Fit scores by spectral ranking.</p><MathLine tex={String.raw`P_{ij}^{\mathrm{BTL}}=\frac{w_i}{w_i+w_j}`}/><small>These fitted scores define the experimental winner.</small>
   </article>
  </div>;
 }
