@@ -1398,3 +1398,20 @@ p { margin: 0; }
  .markov-split .markov-expected-score { position:static; grid-column:1 / -1; grid-row:3; transform:none; }
  .markov-split .markov-expected-score p { margin-top:8px; }
 }
+
+.parwis-tournament-roster { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; border-top:1px solid #ddd; padding-top:10px; margin:8px 0 12px; }
+.tournament-roster-player { display:flex; flex-direction:column; align-items:center; gap:4px; min-width:0; transition:opacity 500ms,filter 500ms; }
+.tournament-roster-player svg { display:block; width:60px; height:60px; }
+.tournament-roster-player strong { font-size:clamp(18px,1.45vw,24px); font-weight:400; }
+.tournament-roster-player span { font-size:clamp(14px,1.1vw,18px); color:#555; }
+.tournament-roster-player.champion strong { font-weight:700; }
+.tournament-roster-player.eliminated { opacity:.28; filter:grayscale(1); }
+.phase-one-running .parwis-live-players { max-height:34vh; }
+.phase-one-running .parwis-candidates { display:none; }
+@media(max-height:760px) and (min-width:651px) {
+ .phase-one-running .parwis-live-players { max-height:29vh; }
+ .parwis-tournament-roster { gap:8px; margin:4px 0 8px; padding-top:7px; }
+ .tournament-roster-player svg { width:45px; height:45px; }
+}
+
+.phase-one-running .parwis-live-player.eliminated { opacity:.28; filter:grayscale(1); }
