@@ -242,7 +242,7 @@ function SetupVisuals({reveal}) {
 function ModellingSlide({active, step: reveal, bridgeOnly = false}) {
   const step = reveal - 2;
   return (
-    <section className={`modelling-slide slide ${bridgeOnly ? 'bridge-slide' : ''} ${active ? 'active' : ''} ${step >= 7 ? 'bridge-active' : ''} ${step >= 9 ? 'uncertainty-revealed' : ''}`} aria-label="BTL modelling and lecture recap" data-step={step} aria-hidden={!active} inert={!active}>
+    <section className={`modelling-slide slide ${bridgeOnly ? 'bridge-slide' : ''} ${active ? 'active' : ''} ${step >= 7 ? 'bridge-active' : ''}`} aria-label="BTL modelling and lecture recap" data-step={step} aria-hidden={!active} inert={!active}>
       <h2 aria-hidden={step >= 7}>{reveal<=2?'Active ranking: the setup':'Modelling noisy comparisons'}</h2>
       <div className={`modelling-stage ${reveal<=2?'formal-setup-stage':''} ${reveal===2?'budget-focused':''} ${reveal>=3?'lecture-stage':''}`}>
         <SetupVisuals reveal={reveal} />
@@ -264,7 +264,6 @@ function ModellingSlide({active, step: reveal, bridgeOnly = false}) {
           <p className="claim-reframed" aria-hidden={step < 7}>What do we mean by “<strong>better</strong>”?</p>
         </div>
         <p className={`recovery-question bridge-text ${step >= 8 ? 'visible' : ''}`} aria-hidden={step < 8}>Can we identify the winner with fewer comparisons?</p>
-        <p className={`uncertainty-question bridge-text ${step >= 9 ? 'visible' : ''}`} aria-hidden={step < 9}>Given what we know, which pair would reduce uncertainty most?</p>
         <p className={`disruption-introduction bridge-text ${step >= 10 ? 'visible' : ''}`} aria-hidden={step < 10}>PARWiS uses a criterion called <strong>disruption</strong>.</p>
       </div>
     </section>
@@ -274,8 +273,8 @@ function ModellingSlide({active, step: reveal, bridgeOnly = false}) {
 function App() {
   const [stage, setStage] = useState(0);
   const slideNumber = stage === 0 ? 1 : stage <= 11 ? 2 : stage <= 23 ? 3 : stage <= 27 ? 4 : stage <= 32 ? 5 : stage <= 36 ? 6 : stage <= 39 ? 7 : stage < MARKOV_START ? 8 : stage < CHESS_START ? 9 : stage < ALGORITHM_START ? 10 : stage < NETFLIX_START ? 11 : stage < RESULTS_START ? 12 : stage < LAST_STAGE ? 13 : 14;
-  const next = () => setStage(value => value === 0 ? 4 : Math.min(LAST_STAGE, value + 1));
-  const previous = () => setStage(value => value <= 4 ? 0 : value - 1);
+  const next = () => setStage(value => value === 0 ? 4 : value === 25 ? 27 : Math.min(LAST_STAGE, value + 1));
+  const previous = () => setStage(value => value <= 4 ? 0 : value === 27 ? 25 : value - 1);
 
   useEffect(() => {
     async function handleKeyDown(event) {
@@ -285,10 +284,10 @@ function App() {
 
       if (['ArrowRight', ' '].includes(event.key)) {
         event.preventDefault();
-        setStage(value => value === 0 ? 4 : Math.min(LAST_STAGE, value + 1));
+        setStage(value => value === 0 ? 4 : value === 25 ? 27 : Math.min(LAST_STAGE, value + 1));
       } else if (event.key === 'ArrowLeft') {
         event.preventDefault();
-        setStage(value => value <= 4 ? 0 : value - 1);
+        setStage(value => value <= 4 ? 0 : value === 27 ? 25 : value - 1);
       } else if (event.key.toLowerCase() === 'f' && !event.repeat) {
         event.preventDefault();
         try {
