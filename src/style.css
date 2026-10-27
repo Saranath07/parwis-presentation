@@ -1386,3 +1386,15 @@ p { margin: 0; }
  .netflix-score-bars > div { margin:4px 0; }
  .staged-model-flow .model-fit-panel .netflix-equation .katex-display { margin:.15em 0; }
 }
+
+.markov-transition-graph { display:block; width:100%; height:280px; margin:14px auto; overflow:visible; }
+.markov-split .markov-transition-graph { height:225px; }
+.markov-definition .markov-definition-note { margin-top:12px; }
+@media(max-height:760px) and (min-width:651px) {
+ .markov-transition-graph { height:230px; margin:8px auto; }
+ .markov-split .markov-transition-graph { height:185px; }
+ .markov-definition .markov-definition-note { margin-top:5px; }
+}
+@media(prefers-reduced-motion:reduce) { .markov-travelling-mass { display:none; } }
+.markov-split .markov-transition-graph { height:190px; }
+@media(max-height:760px) and (min-width:651px) { .markov-split .markov-transition-graph { height:150px; } }
