@@ -220,7 +220,7 @@ function SetupVisuals({reveal}) {
         <text x="220" y="240" textAnchor="middle" fontSize="35.2">…</text>
       </svg>
       <Equation tex={String.raw`\mathcal I=\{1,\ldots,N\}`} />
-      <p>Unknown strengths <span className="setup-inline-math">wᵢ &gt; 0</span></p>
+      <p>Unknown strengths <span className="setup-inline-math" dangerouslySetInnerHTML={{__html:katex.renderToString(String.raw`\theta_i`,{throwOnError:true})}} /></p>
     </div>
     <div className={`formal-setup-budget ${reveal>=2?'setup-visible':''} ${reveal>=3?'setup-dismissed':''}`} aria-hidden={reveal<2||reveal>=3}>
       <h3>A budget of B games</h3>
