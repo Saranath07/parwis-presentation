@@ -126,7 +126,7 @@ function KnockoutVisual({playing}) {
   return (
     <figure className="algorithm-figure" data-tick={tick}>
       <figcaption>Noisy knockout tournament</figcaption>
-      <svg viewBox="0 0 500 330" role="img" aria-label={`Illustrative noisy tournament. ${'ABCD'[pair[0]]} versus ${'ABCD'[pair[1]]}: ${leftWins} to ${rightWins} from ${votes.length} comparisons. ${complete ? 'D wins the tournament; the example will restart.' : 'Repeated votes determine the majority winner.'}`}>
+      <svg viewBox="0 0 500 390" role="img" aria-label={`Illustrative noisy tournament. ${'ABCD'[pair[0]]} versus ${'ABCD'[pair[1]]}: ${leftWins} to ${rightWins} from ${votes.length} comparisons. ${complete ? 'D wins the tournament; the example will restart.' : 'Repeated votes determine the majority winner.'}`}>
         <g className="bracket-lines"><path d="M65 45 V77 H125 V112 M185 45 V77 H125 M315 45 V77 H375 V112 M435 45 V77 H375 M125 112 V149 H250 V197 M375 112 V149 H250" /></g>
         {!complete && selected.map(([x, y], i) => <circle key={i} cx={x} cy={y} r="25" className="active-item-ring" />)}
         {[65,185,315,435].map((x, index) => <ItemNode key={index} x={x} y={35} index={index} />)}
@@ -134,9 +134,9 @@ function KnockoutVisual({playing}) {
         {secondAdvanced && <ItemNode x={375} y={112} index={3} />}
         {complete && <><ItemNode x={250} y={197} index={3} /><text x="285" y="204" fontSize="20.9">Winner</text></>}
         <text x="250" y="242" textAnchor="middle" className="match-status">{complete ? 'Majority winners advance → restart' : `${'ABCD'[pair[0]]} vs ${'ABCD'[pair[1]]} · comparison ${votes.length} / 5`}</text>
-        {Array.from({length: 5}, (_, i) => <circle key={i} cx={190+i*30} cy="270" r="9" fill={votes[i] === undefined ? 'white' : itemColors[votes[i]]} stroke={votes[i] === undefined ? '#bbb' : itemColors[votes[i]]} />)}
-        <text x="250" y="300" textAnchor="middle" fontSize="25.3">{'ABCD'[pair[0]]}: {leftWins}　 {'ABCD'[pair[1]]}: {rightWins}</text>
-        <text x="250" y="326" textAnchor="middle" className="algorithm-caption">Illustrative votes · five comparisons per match</text>
+        {Array.from({length: 5}, (_, i) => <circle key={i} cx={190+i*30} cy="285" r="9" fill={votes[i] === undefined ? 'white' : itemColors[votes[i]]} stroke={votes[i] === undefined ? '#bbb' : itemColors[votes[i]]} />)}
+        <text x="250" y="331" textAnchor="middle" fontSize="25.3">{'ABCD'[pair[0]]}: {leftWins}　 {'ABCD'[pair[1]]}: {rightWins}</text>
+        <text x="250" y="375" textAnchor="middle" className="algorithm-caption">Illustrative votes · five comparisons per match</text>
       </svg>
     </figure>
   );
@@ -203,7 +203,9 @@ function BTLAnimation({playing}) {
         <path d={path} className="sigmoid-curve" />
         <path d={`M${x(difference)} 243 V${y(probability)} H70`} className="sigmoid-projection" />
         <circle className="sigmoid-ball" cx={x(difference)} cy={y(probability)} r="9" fill={itemColors[0]} />
-        <text x="300" y="301" textAnchor="middle" fontSize="24.2">θᵢ − θⱼ = {difference.toFixed(2)}　 pᵢⱼ = {probability.toFixed(2)}</text>
+        <foreignObject x="0" y="275" width="600" height="35">
+          <div xmlns="http://www.w3.org/1999/xhtml" style={{textAlign:'center',fontSize:'20px'}} dangerouslySetInnerHTML={{__html:katex.renderToString(String.raw`\theta_i-\theta_j=${difference.toFixed(2)}\qquad p_{ij}=${probability.toFixed(2)}`,{throwOnError:true})}} />
+        </foreignObject>
       </svg>
       <Equation className="sigmoid-equation" tex={String.raw`p_{ij}=\sigma(\theta_i-\theta_j),\qquad\theta_i=\log w_i`} />
     </>
