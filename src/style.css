@@ -1441,3 +1441,15 @@ p { margin: 0; }
 @media(prefers-reduced-motion:reduce) {
  .animated-outcome,.outcomes-split .outcome-j.visible { transition-duration:1ms; transition-delay:0ms; }
 }
+
+/* Reserve a separate closing row for the final RUCB reveal. */
+@media(min-width:651px) {
+ .rucb-recap-slide:has(.rucb-better-line.visible) { display:grid; grid-template-rows:auto minmax(0,1fr) auto; row-gap:12px; padding-bottom:85px; }
+ .rucb-recap-slide:has(.rucb-better-line.visible) .rucb-recap-layout { grid-template-columns:54% 44%; margin-top:0; }
+ .rucb-recap-slide:has(.rucb-better-line.visible) .rucb-better-line { position:static; margin:0; font-size:clamp(28px,2.65vw,44px); }
+ .rucb-recap-slide:has(.rucb-better-line.visible) .rucb-recap-line:not(.executing) { min-height:36px; padding-block:3px; font-size:clamp(20px,1.7vw,28px); }
+ .rucb-recap-slide:has(.rucb-better-line.visible) .rucb-recap-line.executing { font-size:clamp(30px,2.5vw,40px); }
+ .guided-phase-11.rucb-recap-example { min-height:0; }
+ .guided-phase-11 .rucb-arm-arena { max-height:120px; }
+ .guided-phase-11 .rucb-recap-message { min-height:0; margin-bottom:0; }
+}
