@@ -8,7 +8,7 @@ const newUpper=publishedUpper(after,round+1);
 const messages=[
  'Start with four items and no observed wins.',
  'At a later round, use the observed wins to calculate one confidence bound.',
- 'Now calculate every entry. Uᵢⱼ bounds the probability that row i beats column j.',
+ 'Now calculate every entry. U_ij bounds the probability that row i beats column j.',
  'A passes every opponent: move A into the candidate set.',
  'B also passes every opponent: keep B as a candidate.',
  'C fails against A: reject C as a possible champion.',
@@ -84,7 +84,7 @@ export function RucbRecapSlide({active,step}){
      {testRow>=0&&<div className={`rucb-row-verdict ${testRow>=2?'reject':''}`}><MathLine tex={testRow<2?String.raw`U_{${letters[testRow]}j}\ge\tfrac12\quad\forall j\quad\checkmark`:String.raw`U_{${letters[testRow]}A}=0.39<\tfrac12\quad\times`}/></div>}
      <ArmArena phase={phase}/>
     </>}
-    {phase!==1&&<p className="rucb-recap-message">{messages[phase]}</p>}
+    {phase!==1&&<p className="rucb-recap-message">{phase===2?<>Now calculate every entry. <MathLine tex="U_{ij}"/> bounds the probability that row <MathLine tex="i"/> beats column <MathLine tex="j"/>.</>:messages[phase]}</p>}
     {phase>=8&&<div className="rucb-comparison-count"><MathLine tex={updated?String.raw`N_{BD}:\ 4\to5\qquad\widehat p_{DB}:\ 0.25\to0.40`:String.raw`N_{BD}=4\qquad\widehat p_{DB}=0.25`}/></div>}
    </div>
   </div>
