@@ -58,16 +58,33 @@ export function RucbRecapSlide({active,step}){
    <div className="rucb-recap-code">{rows.map((row,i)=><div key={i} className={`rucb-recap-line ${activeLine===i?'executing':''}`}><span className="rucb-line-number">{i+1}</span>{row}</div>)}</div>
    <div className={`rucb-recap-example guided-phase-${phase}`}>
     {phase===0?<div className="rucb-example-intro"><MathLine tex={String.raw`W_{ij}=0\quad\text{for all }i,j`}/><ArmArena phase={phase}/><p>Each comparison adds one observed win.</p></div>:phase===1?<div className="rucb-single-bound">
-     <h3>What does <MathLine tex="U_{DB}"/> mean?</h3><p>An optimistic upper bound on<br/>the probability that <strong>D beats B</strong>.</p>
-     <div className="rucb-bound-parts"><span><small>Observed win fraction</small><MathLine tex={String.raw`\frac{W_{DB}}{N_{DB}}=\frac14=0.25`}/></span><span>+</span><span><small>Uncertainty bonus</small><MathLine tex={String.raw`\sqrt{\frac{\log245}{4}}\approx1.17`}/></span></div>
-     <div className="rucb-bound-answer"><MathLine tex={String.raw`U_{DB}\approx1.42`}/></div><small>Few comparisons → a large bonus. A bound may exceed 1.</small>
+     <h3>What does <MathLine tex="U_{DB}"/> mean?</h3>
+     <svg className="rucb-bound-picture" viewBox="0 0 560 380" role="img" aria-label="D versus B: D won one of four comparisons. The observed win rate is 0.25. An uncertainty bonus of 1.17 gives an optimistic upper bound of 1.42, beyond probability one.">
+      <circle cx="175" cy="42" r="29" fill={colors[3]}/><text x="175" y="51" textAnchor="middle" fill="white" fontSize="28">D</text>
+      <text x="280" y="50" textAnchor="middle" fontSize="24">vs</text>
+      <circle cx="385" cy="42" r="29" fill={colors[1]}/><text x="385" y="51" textAnchor="middle" fill="white" fontSize="28">B</text>
+      <text x="280" y="108" textAnchor="middle" fontSize="22">Four games · winners</text>
+      {['B','B','D','B'].map((letter,i)=><g key={i}><circle cx={175+i*70} cy="148" r="23" fill={letter==='D'?colors[3]:colors[1]}/><text x={175+i*70} y="156" textAnchor="middle" fill="white" fontSize="25">{letter}</text></g>)}
+      <text x="280" y="208" textAnchor="middle" fontSize="25">D won 1 of 4 → 0.25</text>
+      <path d="M45 300 H515" stroke="#999" strokeWidth="1.5"/>
+      <path d="M45 294 V306 M192 294 V306 M339 280 V312 M486 294 V306" stroke="#999" strokeWidth="1.5"/>
+      <path d="M119 300 H462" stroke={colors[3]} strokeWidth="5" strokeDasharray="9 6"/>
+      <path d="M452 291 L465 300 L452 309" fill="none" stroke={colors[3]} strokeWidth="3"/>
+      <circle cx="119" cy="300" r="7" fill="#111"/><circle cx="462" cy="300" r="8" fill={colors[3]}/>
+      <text x="280" y="268" textAnchor="middle" fontSize="22" fill={colors[3]}>Uncertainty bonus +1.17</text>
+      <text x="45" y="337" textAnchor="middle" fontSize="20">0</text><text x="339" y="337" textAnchor="middle" fontSize="20">1</text>
+      <text x="119" y="337" textAnchor="middle" fontSize="22">0.25</text><text x="462" y="337" textAnchor="middle" fontSize="22" fill={colors[3]}>1.42</text>
+      <text x="119" y="369" textAnchor="middle" fontSize="18">Observed</text><text x="462" y="369" textAnchor="middle" fontSize="18">Optimistic bound</text>
+     </svg>
+     <div className="rucb-picture-equation"><MathLine tex={String.raw`U_{DB}=\underbrace{0.25}_{\text{observed}}+\underbrace{1.17}_{\text{uncertainty}}\approx1.42`}/></div>
+     <small>Upper bound for D beating B · may exceed 1</small>
     </div>:<>
      <div className="rucb-matrix-heading">Computed <MathLine tex="U"/> · <MathLine tex={`t=${round+(updated?1:0)}`}/> · <MathLine tex={String.raw`\alpha=1`}/></div>
      <table className="rucb-upper-table" aria-label="U matrix: row i beats column j"><thead><tr><th><MathLine tex={String.raw`i\downarrow\;\cdot\;j\rightarrow`}/></th>{[...letters].map((c,j)=><th key={c} className={phase>=7&&j===champion?'champion-column':''}><MathLine tex={c}/></th>)}</tr></thead><tbody>{table.map((row,i)=><tr key={i} className={`${testRow===i?'testing-row':''} ${testRow>=0&&testRow!==i?'untested-row':''}`}><th style={{color:colors[i]}}><MathLine tex={letters[i]}/></th>{row.map((u,j)=><td key={j} className={`${phase>=7&&j===champion?'champion-column':''} ${phase>=8&&i===challenger&&j===champion?'chosen-upper':''} ${testRow===i&&u<.5?'failing-upper':''}`}>{u.toFixed(2)}</td>)}</tr>)}</tbody></table>
      {testRow>=0&&<div className={`rucb-row-verdict ${testRow>=2?'reject':''}`}><MathLine tex={testRow<2?String.raw`U_{${letters[testRow]}j}\ge\tfrac12\quad\forall j\quad\checkmark`:String.raw`U_{${letters[testRow]}A}=0.39<\tfrac12\quad\times`}/></div>}
      <ArmArena phase={phase}/>
     </>}
-    <p className="rucb-recap-message">{messages[phase]}</p>
+    {phase!==1&&<p className="rucb-recap-message">{messages[phase]}</p>}
     {phase>=8&&<div className="rucb-comparison-count"><MathLine tex={updated?String.raw`N_{BD}:\ 4\to5\qquad\widehat p_{DB}:\ 0.25\to0.40`:String.raw`N_{BD}=4\qquad\widehat p_{DB}=0.25`}/></div>}
    </div>
   </div>
