@@ -498,6 +498,7 @@ p { margin: 0; }
   transition: opacity 450ms ease, transform 650ms ease;
 }
 .comic-person { display: flex; align-items: center; flex-direction: column; width: 40%; }
+.comic-scene { align-items:flex-end; padding-bottom:12vh; }
 .doodle-person { width: min(220px, 90%); height: auto; overflow: visible; }
 .doodle-head { transform-origin: 110px 145px; }
 .talking .doodle-head { animation: talk-head 1s ease-in-out infinite alternate; }
