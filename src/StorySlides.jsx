@@ -58,7 +58,7 @@ export function LastComparisonSlide({active, step}) {
         <h3>A familiar paper</h3>
         <img className="challenger-paper-preview" src={`${import.meta.env.BASE_URL}papers/wisdom-first-page.png`} alt="First page of WiSDoM: Frugal Winner Selection by Design of Matchups"/>
         <p className="challenger-paper-title">WiSDoM</p>
-        <Show visible={step >= 1} className="challenger-paper-details"><p>Saranath P · Arun Rajkumar</p><p>The 5th Workshop on Uncertainty Reasoning<br/>and Quantification in Decision Making<br/>KDD 2026</p></Show>
+        <Show visible={step >= 1} className="challenger-paper-details"><p>Saranath P · Arun Rajkumar</p><p>KDD 2026</p></Show>
       </div>
       <div className="challenger-option">
         <div className="comparison-connector" aria-hidden="true" />
