@@ -11,7 +11,7 @@ function DoodlePerson({color, side, talking, agreed}) {
     <g className="doodle-head">
       {side==='left'&&<path d="M57 93 Q51 39 91 35 Q151 21 164 77 L171 165 Q151 180 136 153 L83 153 Q65 180 49 165 Z" fill="#171717" stroke="#000" strokeWidth="2.5" />}
       <circle cx="110" cy="95" r="52" fill="white" stroke="#000" strokeWidth="3" />
-      <path d={side==='left'?'M59 91 Q54 37 99 37 Q151 29 162 84 Q128 79 111 56 Q94 83 59 91 Z':'M65 77 Q75 25 119 43 Q150 32 158 77'} fill={side==='left'?'#171717':color} stroke="#000" strokeWidth="2.5" />
+      <path d={side==='left'?'M59 91 Q54 37 99 37 Q151 29 162 84 Q128 79 111 56 Q94 83 59 91 Z':'M65 77 Q75 25 119 43 Q150 32 158 77'} fill="#171717" stroke="#000" strokeWidth="2.5" />
       <circle cx="93" cy="94" r="4" fill="#000" /><circle cx="126" cy="94" r="4" fill="#000" />
       <path d={agreed ? 'M85 79 L101 79 M118 79 L135 79' : 'M84 75 L101 80 M118 80 L136 74'} stroke="#000" strokeWidth="2.5" />
       <path d={agreed ? 'M90 114 Q110 139 131 113' : 'M94 120 Q111 110 128 120'} fill="none" stroke="#000" strokeWidth="3" strokeLinecap="round" />
