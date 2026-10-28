@@ -1406,6 +1406,9 @@ p { margin: 0; }
 .parwis-tournament-roster { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; border-top:1px solid #ddd; padding-top:10px; margin:8px 0 12px; }
 .tournament-roster-player { display:flex; flex-direction:column; align-items:center; gap:4px; min-width:0; transition:opacity 500ms,filter 500ms; }
 .tournament-roster-player svg { display:block; width:60px; height:60px; }
+.tournament-roster-player svg { transition:opacity 450ms; }
+.tournament-roster-player.at-board svg { opacity:.3; }
+.parwis-player-traveller { pointer-events:none; }
 .tournament-roster-player strong { font-size:clamp(18px,1.45vw,24px); font-weight:400; }
 .tournament-roster-player span { font-size:clamp(14px,1.1vw,18px); color:#555; }
 .tournament-roster-player.champion strong { font-weight:700; }
