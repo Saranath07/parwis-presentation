@@ -45,7 +45,7 @@ export function AlgorithmSlide({active,step}){
             const playing=displayedPair?.length===2&&involved;
             const x=playing?(displayedPair[0]===index?120:440):120,y=90;
             return <g key={player.name} style={{transform:`translate(${x}px,${y}px)`}} className={`parwis-live-player ${frame.pair&&!involved?'waiting':''} ${involved?'in-match':''} ${!second&&eliminated.has(index)?'eliminated':''}`}>
-              <SeatedPlayer color={player.color} facingLeft={playing?displayedPair[1]===index:index%2===1} portrait={index} pleased={won} />
+              <SeatedPlayer color={player.color} facingLeft={x>280} portrait={index} pleased={won} />
               {won&&<g className="winner-crown" role="img" aria-label={`${player.name} wins`}>
                 <path d="M-23-63 L-13-54 L0-70 L13-54 L23-63 L18-43 H-18 Z" fill="#efc349" stroke="#8b6818" strokeWidth="1.8" strokeLinejoin="round" />
                 <path d="M-18-39 H18" fill="none" stroke="#8b6818" strokeWidth="3" strokeLinecap="round" />
