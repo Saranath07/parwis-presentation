@@ -9,9 +9,9 @@ function DoodlePerson({color, side, talking, agreed}) {
     <path d="M70 158 Q110 138 150 158 L163 237 H57 Z" fill={color} stroke="#000" strokeWidth="2.5" />
     <path d={agreed ? 'M72 169 L38 127 L27 136 M148 169 L182 127 L193 136' : side === 'left' ? 'M72 169 L40 193 L25 172 M148 169 L185 146 L194 156' : 'M72 169 L40 146 L26 157 M148 169 L180 193 L195 172'} fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" />
     <g className="doodle-head">
-      {side==='left'&&<path d="M57 93 Q51 39 91 35 Q151 21 164 77 L171 165 Q151 180 136 153 L83 153 Q65 180 49 165 Z" fill={color} stroke="#000" strokeWidth="2.5" />}
+      {side==='left'&&<path d="M57 93 Q51 39 91 35 Q151 21 164 77 L171 165 Q151 180 136 153 L83 153 Q65 180 49 165 Z" fill="#171717" stroke="#000" strokeWidth="2.5" />}
       <circle cx="110" cy="95" r="52" fill="white" stroke="#000" strokeWidth="3" />
-      <path d={side==='left'?'M59 91 Q54 37 99 37 Q151 29 162 84 Q128 79 111 56 Q94 83 59 91 Z':'M65 77 Q75 25 119 43 Q150 32 158 77'} fill={color} stroke="#000" strokeWidth="2.5" />
+      <path d={side==='left'?'M59 91 Q54 37 99 37 Q151 29 162 84 Q128 79 111 56 Q94 83 59 91 Z':'M65 77 Q75 25 119 43 Q150 32 158 77'} fill={side==='left'?'#171717':color} stroke="#000" strokeWidth="2.5" />
       <circle cx="93" cy="94" r="4" fill="#000" /><circle cx="126" cy="94" r="4" fill="#000" />
       <path d={agreed ? 'M85 79 L101 79 M118 79 L135 79' : 'M84 75 L101 80 M118 80 L136 74'} stroke="#000" strokeWidth="2.5" />
       <path d={agreed ? 'M90 114 Q110 139 131 113' : 'M94 120 Q111 110 128 120'} fill="none" stroke="#000" strokeWidth="3" strokeLinecap="round" />
