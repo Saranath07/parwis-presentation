@@ -1444,6 +1444,16 @@ p { margin: 0; }
 
 /* Reserve a separate closing row for the final RUCB reveal. */
 @media(min-width:651px) {
+ .lecture-stage .knockout-panel.parked-left { left:23%; width:40%; }
+ .lecture-stage .duelling-panel.visible { left:77%; width:40%; }
+ .lecture-stage:has(.duelling-panel.visible) .algorithm-panel.visible { top:22%; transform:translate(-50%,0); }
+ .lecture-stage:has(.duelling-panel.visible) .algorithm-figure figcaption { min-height:2.5em; display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+ .lecture-stage .algorithm-panel .algorithm-caption { font-size:15px; }
+}
+@media(max-height:760px) and (min-width:651px) {
+ .lecture-stage:has(.duelling-panel.visible) .algorithm-panel.visible { top:15%; }
+}
+@media(min-width:651px) {
  .rucb-recap-slide:has(.rucb-better-line.visible) { display:grid; grid-template-rows:auto minmax(0,1fr) auto; row-gap:12px; padding-bottom:85px; }
  .rucb-recap-slide:has(.rucb-better-line.visible) .rucb-recap-layout { grid-template-columns:54% 44%; margin-top:0; }
  .rucb-recap-slide:has(.rucb-better-line.visible) .rucb-better-line { position:static; margin:0; font-size:clamp(28px,2.65vw,44px); }

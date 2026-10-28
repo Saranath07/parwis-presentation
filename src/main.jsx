@@ -147,25 +147,25 @@ function DuellingVisual({playing}) {
   const tick = useLoopTick(playing, 800);
   const record = duellingTrace[Math.floor(tick / 4) % duellingTrace.length];
   const phase = tick % 4;
-  const positions = [[130, 48], [370, 48], [130, 172], [370, 172]];
+  const positions = [[130, 80], [370, 80], [130, 210], [370, 210]];
   const c = positions[record.champion], d = positions[record.challenger];
   const current = phase === 3 ? record.after : record.before;
   const phases = ['Choose champion', 'Choose challenger', 'Play the comparison', 'Update estimates'];
   return (
     <figure className="algorithm-figure" data-tick={tick} data-phase={phase}>
       <figcaption>Duelling bandits (RUCB)</figcaption>
-      <svg viewBox="0 0 500 330" role="img" aria-label={`Illustrative RUCB round ${record.round}. ${phases[phase]}. Champion ${'ABCD'[record.champion]}, challenger ${'ABCD'[record.challenger]}.`}>
-        <g className="duel-edges"><path d="M130 48 H370 V172 H130 Z M370 48 L130 172 M130 48 L370 172" /></g>
+      <svg viewBox="0 0 500 440" role="img" aria-label={`Illustrative RUCB round ${record.round}. ${phases[phase]}. Champion ${'ABCD'[record.champion]}, challenger ${'ABCD'[record.challenger]}.`}>
+        <g className="duel-edges"><path d="M130 80 H370 V210 H130 Z M370 80 L130 210 M130 80 L370 210" /></g>
         {phase >= 1 && <line x1={c[0]} y1={c[1]} x2={d[0]} y2={d[1]} stroke="#000" strokeWidth="2.5" />}
         <circle cx={c[0]} cy={c[1]} r="27" className="active-item-ring" />
         {phase >= 1 && <circle cx={d[0]} cy={d[1]} r="27" className="challenger-ring" />}
         {positions.map(([x,y], index) => <ItemNode key={index} x={x} y={y} index={index} />)}
         <text x={c[0]} y={c[1]-38} textAnchor="middle" fontSize="19.8">Champion</text>
         {phase >= 1 && <text x={d[0]} y={d[1]+45} textAnchor="middle" fontSize="19.8">Challenger</text>}
-        <text x="250" y="242" textAnchor="middle" className="match-status">{phases[phase]}</text>
-        {phase === 2 ? <text x="250" y="277" textAnchor="middle" fontSize="27.5" fill={itemColors[record.winner]}>{'ABCD'[record.winner]} wins</text> : <text x="250" y="277" textAnchor="middle" fontSize="25.3">{phase === 0 ? `Champion: ${'ABCD'[record.champion]}` : `${'ABCD'[record.champion]} vs ${'ABCD'[record.challenger]}　 N = ${current.n}${phase === 3 ? '  ↑' : ''}`}</text>}
-        <text x="250" y="305" textAnchor="middle" fontSize="19.8">{phase === 3 ? `Empirical win fraction: ${(current.wins / Math.max(1, current.n)).toFixed(2)}` : `Round ${record.round}`}</text>
-        <text x="250" y="329" textAnchor="middle" className="algorithm-caption">Illustrative run of the lecture’s simplified RUCB</text>
+        <text x="250" y="300" textAnchor="middle" className="match-status">{phases[phase]}</text>
+        {phase === 2 ? <text x="250" y="342" textAnchor="middle" fontSize="27.5" fill={itemColors[record.winner]}>{'ABCD'[record.winner]} wins</text> : <text x="250" y="342" textAnchor="middle" fontSize="25.3">{phase === 0 ? `Champion: ${'ABCD'[record.champion]}` : `${'ABCD'[record.champion]} vs ${'ABCD'[record.challenger]}　 N = ${current.n}${phase === 3 ? '  ↑' : ''}`}</text>}
+        <text x="250" y="380" textAnchor="middle" fontSize="19.8">{phase === 3 ? `Empirical win fraction: ${(current.wins / Math.max(1, current.n)).toFixed(2)}` : `Round ${record.round}`}</text>
+        <text x="250" y="424" textAnchor="middle" className="algorithm-caption">Illustrative run of the lecture’s simplified RUCB</text>
       </svg>
     </figure>
   );
