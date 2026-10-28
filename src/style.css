@@ -1415,3 +1415,29 @@ p { margin: 0; }
 }
 
 .phase-one-running .parwis-live-player.eliminated { opacity:.28; filter:grayscale(1); }
+
+.phase-two-running .parwis-live-players { max-height:34vh; }
+.roster-best-score { font-weight:700; border-bottom:2px solid #111; background:#eee; padding:2px 4px; }
+@media(max-height:760px) and (min-width:651px) {
+ .phase-two-running .parwis-live-players { max-height:29vh; }
+}
+
+.parwis-objective-footnote,.netflix-footnote,.measures-source,.experiment-source,.rucb-recap-source,.markov-explanation-source,.chess-illustration-note,.animated-outcomes .surface-caption {
+ font-size:clamp(10px,.85vw,14px); line-height:1.35;
+}
+
+.lecture-stage .lecture-intro { top:4%; }
+
+/* Keep the outcome's text layout fixed while the whole panel scales and moves. */
+@media(min-width:651px) {
+ .animated-outcome,.animated-outcome.outcome-j,.outcomes-split .outcome-i { width:66%; max-width:850px; transform-origin:50% 0; }
+ .animated-outcome { transform:translate(-50%,0) scale(1); transition:left 850ms cubic-bezier(.22,1,.36,1),transform 850ms cubic-bezier(.22,1,.36,1),opacity 300ms ease,visibility 300ms; }
+ .outcomes-split .outcome-i { left:25%; transform:translate(-50%,0) scale(.7); }
+ .animated-outcome.outcome-j { left:75%; transform:translate(-50%,12px) scale(.7); }
+ .outcomes-split .outcome-j.visible { transform:translate(-50%,0) scale(.7); transition-delay:850ms; }
+ .animated-outcomes .animated-outcome .loss-surface { height:min(43vh,390px); max-height:none; transition:none; }
+ .animated-outcome > p { margin-bottom:12px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .animated-outcome,.outcomes-split .outcome-j.visible { transition-duration:1ms; transition-delay:0ms; }
+}

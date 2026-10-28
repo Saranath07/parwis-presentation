@@ -38,12 +38,12 @@ export function AlgorithmSlide({active,step}){
       </div>
       <div className="parwis-live-example">
         <div className="parwis-budget"><span>{second?`Phase 2 · Round ${Math.min(frame.round,3) || 1}`:'Phase 1 · Tournament'}</span><strong>{frame.used} / 6 comparisons</strong></div>
-        <svg className={`parwis-live-players ${displayedPair?.length===2?'match-on-board':''}`} viewBox={second?'0 0 560 540':'0 0 560 300'} role="img" aria-label={frame.message}>
+        <svg className={`parwis-live-players ${displayedPair?.length===2?'match-on-board':''}`} viewBox="0 0 560 300" role="img" aria-label={frame.message}>
           {chessPlayers.map((player,index)=>{
             const involved=displayedPair?.includes(index),won=displayedWinner===index;
-            if(!second&&!involved)return null;
+            if(!involved)return null;
             const playing=displayedPair?.length===2&&involved;
-            const x=playing?(displayedPair[0]===index?120:440):(index%2===0?120:440),y=playing?(second?210:90):(index<2?90:330);
+            const x=playing?(displayedPair[0]===index?120:440):120,y=90;
             return <g key={player.name} style={{transform:`translate(${x}px,${y}px)`}} className={`parwis-live-player ${frame.pair&&!involved?'waiting':''} ${involved?'in-match':''} ${!second&&eliminated.has(index)?'eliminated':''}`}>
               <SeatedPlayer color={player.color} facingLeft={playing?displayedPair[1]===index:index%2===1} portrait={index} pleased={won} />
               {won&&<g className="winner-crown" role="img" aria-label={`${player.name} wins`}>
@@ -54,21 +54,20 @@ export function AlgorithmSlide({active,step}){
               <text x="0" y="180" textAnchor="middle" fontSize="29.7" fill={player.color}>{frame.ratings[index]}</text>
             </g>;
           })}
-          <SmallChessboard className="walkthrough-board" y={second?210:90} />
-          <text x="280" y={second?194:74} textAnchor="middle" fontSize="23.1">{displayedPair?.length===2?displayedPair.map(i=>chessPlayers[i].shortName).join(' vs '):'Next comparison'}</text>
+          <SmallChessboard className="walkthrough-board" y={90} />
+          <text x="280" y={74} textAnchor="middle" fontSize="23.1">{displayedPair?.length===2?displayedPair.map(i=>chessPlayers[i].shortName).join(' vs '):'Next comparison'}</text>
         </svg>
-        {!second&&<div className="parwis-tournament-roster" aria-label="Tournament lineup">
+        <div className="parwis-tournament-roster" aria-label={second?'Current player scores':'Tournament lineup'}>
           {chessPlayers.map((player,index)=>{
-            const out=eliminated.has(index),champion=tournamentChampion===index;
+            const out=!second&&eliminated.has(index),champion=second?displayedWinner===index:tournamentChampion===index;
+            const disruption=frame.scores.find(s=>s.j===index);
             const status=out?'Out':champion?(frame.used===3?'Tournament winner':'Stays'):tournamentChampion===undefined&&index===0?'Starts':index===frame.used+1?'Next':'Waiting';
             return <div key={player.name} className={`tournament-roster-player ${out?'eliminated':''} ${champion?'champion':''}`} data-eliminated={out}>
               <svg viewBox={`${index*100} ${champion?100:0} 100 100`} role="img" aria-label={player.name}><image href={`${import.meta.env.BASE_URL}chess-portraits.png`} width="400" height="200"/></svg>
-              <strong>{player.shortName}</strong><span>{status}</span>
+              <strong>{player.shortName}</strong><span>{second?frame.ratings[index]:status}</span>
+              {second&&disruption&&<span className={frame.pair?.[1]===index?'roster-best-score':''}><InlineMath tex={`d=${disruption.score.toFixed(4)}`} /></span>}
             </div>;
           })}
-        </div>}
-        <div className="parwis-candidates" aria-label="Challenger disruption scores">
-          {frame.scores.map(({j,score})=><span key={j} className={frame.pair?.[1]===j?'best-candidate':''}>{chessPlayers[j].shortName} <strong>{score.toFixed(4)}</strong></span>)}
         </div>
         <p className="parwis-step-message" aria-live={active?'polite':'off'}>{frame.message}</p>
       </div>

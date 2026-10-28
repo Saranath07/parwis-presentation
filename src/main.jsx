@@ -246,13 +246,13 @@ function ModellingSlide({active, step: reveal, bridgeOnly = false}) {
       <h2 aria-hidden={step >= 7}>{reveal<=2?'Active ranking: the setup':'Modelling noisy comparisons'}</h2>
       <div className={`modelling-stage ${reveal<=2?'formal-setup-stage':''} ${reveal===2?'budget-focused':''} ${reveal>=3?'lecture-stage':''}`}>
         <SetupVisuals reveal={reveal} />
-        <div className={`btl-block ${reveal<1?'setup-btl-hidden':''} ${step >= 1 ? 'at-top' : ''}`} aria-hidden={reveal<1||step >= 7}>
+        {reveal<=2&&<div className={`btl-block ${reveal<1?'setup-btl-hidden':''} ${step >= 1 ? 'at-top' : ''}`} aria-hidden={reveal<1||step >= 7}>
           <h3>BTL assumption</h3>
           <Equation tex={String.raw`p_{ij}=\Pr(i\succ j)=\frac{w_i}{w_i+w_j}`} />
           <div className={`btl-animation-wrapper ${step >= 1 ? 'disappeared' : ''}`} aria-hidden={step >= 1}>
             <BTLAnimation playing={active && (reveal === 1 || reveal === 2)} />
           </div>
-        </div>
+        </div>}
         <p className={`lecture-intro ${step >= 1 ? 'visible' : ''}`} aria-hidden={step < 1 || step >= 7}>From the lectures</p>
         <div className={`algorithm-panel knockout-panel ${step >= 2 ? 'visible' : ''} ${step >= 3 ? 'parked-left' : ''}`} aria-hidden={step < 2 || step >= 7}>
           <KnockoutVisual playing={active && step >= 2} />
