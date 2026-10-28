@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useLayoutEffect,useRef} from 'react';
 import katex from 'katex';
 import {rucbExampleUpper as upper,rucbExampleChampion as champion,rucbExampleChallenger as challenger,rucbExampleWins as wins,rucbExampleRound as round,publishedUpper} from './rucbRecap.js';
 const letters='ABCD',colors=['#3276b1','#c75a59','#35956b','#8862ae'];
@@ -40,6 +40,23 @@ function ArmArena({phase}){
  </svg>;
 }
 export function RucbRecapSlide({active,step}){
+ const codeRef=useRef(null),previousRects=useRef([]);
+ useLayoutEffect(()=>{
+  const lines=[...codeRef.current.children];
+  const rects=lines.map(line=>line.getBoundingClientRect());
+  const previous=previousRects.current;
+  previousRects.current=rects;
+  if(!active||!previous.length||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const animations=lines.map((line,i)=>{
+   const from=previous[i],to=rects[i];
+   if(!from||!to.width||!to.height)return null;
+   return line.animate([
+    {transform:`translate(${from.left-to.left}px,${from.top-to.top}px) scale(${from.width/to.width},${from.height/to.height})`},
+    {transform:'none'},
+   ],{duration:450,easing:'cubic-bezier(.22,1,.36,1)'});
+  });
+  return()=>animations.forEach(animation=>animation?.cancel());
+ },[active,step]);
  const phase=Math.max(0,Math.min(step,11)),updated=phase>=10,table=updated?newUpper:upper;
  const activeLine=phase===0?0:phase<=2?1:phase<=6?2:phase===7?3:phase===8?4:phase<=10?5:6;
  const testRow=phase>=3&&phase<=6?phase-3:-1;
@@ -55,7 +72,7 @@ export function RucbRecapSlide({active,step}){
  return <section className={`slide story-slide rucb-recap-slide guided-rucb ${active?'active':''}`} aria-label="Published RUCB algorithm recap" data-step={step} aria-hidden={!active} inert={!active}>
   <h2>RUCB: optimistically test a champion</h2>
   <div className="rucb-recap-layout">
-   <div className="rucb-recap-code">{rows.map((row,i)=><div key={i} className={`rucb-recap-line ${activeLine===i?'executing':''}`}><span className="rucb-line-number">{i+1}</span>{row}</div>)}</div>
+   <div ref={codeRef} className="rucb-recap-code">{rows.map((row,i)=><div key={i} className={`rucb-recap-line ${activeLine===i?'executing':''}`}><span className="rucb-line-number">{i+1}</span>{row}</div>)}</div>
    <div className={`rucb-recap-example guided-phase-${phase}`}>
     {phase===0?<div className="rucb-example-intro"><MathLine tex={String.raw`W_{ij}=0\quad\text{for all }i,j`}/><ArmArena phase={phase}/><p>Each comparison adds one observed win.</p></div>:phase===1?<div className="rucb-single-bound">
      <h3>What does <MathLine tex="U_{DB}"/> mean?</h3>
