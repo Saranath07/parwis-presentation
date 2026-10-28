@@ -1106,6 +1106,14 @@ p { margin: 0; }
 
 .presentation-page-number { position:absolute; bottom:18px; left:20px; z-index:10; color:#777; font-size:20.608px; font-variant-numeric:tabular-nums; pointer-events:none; }
 
+.netflix-intro-slide { background:#fffdf8; display:flex; align-items:center; justify-content:center; }
+.netflix-intro-animation { position:relative; width:min(720px,65vw); height:min(350px,45vh); display:grid; place-items:center; }
+.netflix-intro-n { position:absolute; color:#b50910; font-family:Impact,'Arial Black',sans-serif; font-size:clamp(140px,22vw,290px); line-height:1; text-shadow:5px 5px 0 #221d1b; animation:retro-netflix-n 2400ms cubic-bezier(.22,1,.36,1) both; }
+.netflix-intro-wordmark { width:100%; max-height:100%; object-fit:contain; animation:retro-netflix-wordmark 2400ms cubic-bezier(.22,1,.36,1) both; }
+@keyframes retro-netflix-n { 0% { opacity:0; transform:scale(.7); } 15%,35% { opacity:1; transform:scale(1); } 55%,100% { opacity:0; transform:scale(1.25); } }
+@keyframes retro-netflix-wordmark { 0%,35% { opacity:0; clip-path:inset(0 50%); transform:scale(.8); } 65%,100% { opacity:1; clip-path:inset(0); transform:scale(1); } }
+@media(prefers-reduced-motion:reduce) { .netflix-intro-n { display:none; } .netflix-intro-wordmark { animation:none; } }
+
 .rucb-recap-slide { padding:4vh 4vw 110px; }
 .rucb-recap-layout { display:grid; grid-template-columns:55% 45%; gap:2%; width:100%; flex:1; min-height:0; margin-top:20px; align-items:center; }
 .rucb-recap-code { font-size:clamp(21.896px,1.996vw,30.912px); }

@@ -17,7 +17,8 @@ const MARKOV_START = MEASURES_START + 4;
 const CHESS_START = MARKOV_START + 3;
 const ALGORITHM_START = CHESS_START + 4;
 const NETFLIX_START = ALGORITHM_START + walkthroughFrames.length;
-const RESULTS_START = NETFLIX_START + 6;
+const NETFLIX_DATA_START = NETFLIX_START + 1;
+const RESULTS_START = NETFLIX_DATA_START + 6;
 const LAST_STAGE = RESULTS_START + 1;
 
 function OpeningSlide({active}) {
@@ -44,6 +45,15 @@ function OpeningSlide({active}) {
       </section>
     </section>
   );
+}
+
+function NetflixIntro({active}) {
+  return <section className={`slide netflix-intro-slide ${active?'active':''}`} aria-label="Vintage Netflix introduction" aria-hidden={!active} inert={!active}>
+    {active&&<div className="netflix-intro-animation">
+      <span className="netflix-intro-n" aria-hidden="true">N</span>
+      <img className="netflix-intro-wordmark" src={`${import.meta.env.BASE_URL}netflix/netflix-2001.svg`} alt="Netflix" />
+    </div>}
+  </section>;
 }
 
 function Player({x, y, color}) {
@@ -276,7 +286,7 @@ function ModellingSlide({active, step: reveal, bridgeOnly = false}) {
 
 function App() {
   const [stage, setStage] = useState(0);
-  const slideNumber = stage === 0 ? 1 : stage <= 11 ? 2 : stage <= 23 ? 3 : stage <= 27 ? 4 : stage <= 32 ? 5 : stage <= 36 ? 6 : stage <= 39 ? 7 : stage < MARKOV_START ? 8 : stage < CHESS_START ? 9 : stage < ALGORITHM_START ? 10 : stage < NETFLIX_START ? 11 : stage < RESULTS_START ? 12 : stage < LAST_STAGE ? 13 : 14;
+  const slideNumber = stage === 0 ? 1 : stage <= 11 ? 2 : stage <= 23 ? 3 : stage <= 27 ? 4 : stage <= 32 ? 5 : stage <= 36 ? 6 : stage <= 39 ? 7 : stage < MARKOV_START ? 8 : stage < CHESS_START ? 9 : stage < ALGORITHM_START ? 10 : stage < NETFLIX_START ? 11 : stage === NETFLIX_START ? 12 : stage < RESULTS_START ? 13 : stage < LAST_STAGE ? 14 : 15;
   const next = () => setStage(value => value === 0 ? 4 : value === 10 ? 12 : value === 25 ? 27 : Math.min(LAST_STAGE, value + 1));
   const previous = () => setStage(value => value <= 4 ? 0 : value === 12 ? 10 : value === 27 ? 25 : value - 1);
 
@@ -319,13 +329,14 @@ function App() {
       <MarkovDisruptionSlide active={stage >= MARKOV_START && stage < CHESS_START} step={stage - MARKOV_START} />
       <ChessSelectionSlide active={stage >= CHESS_START && stage < ALGORITHM_START} step={stage - CHESS_START} />
       <AlgorithmSlide active={stage >= ALGORITHM_START && stage < NETFLIX_START} step={stage - ALGORITHM_START} />
-      <NetflixSlide active={stage >= NETFLIX_START && stage < LAST_STAGE} step={stage - NETFLIX_START} />
+      <NetflixIntro active={stage === NETFLIX_START} />
+      <NetflixSlide active={stage >= NETFLIX_DATA_START && stage < LAST_STAGE} step={stage - NETFLIX_DATA_START} />
       <section className={`slide questions-slide ${stage === LAST_STAGE ? 'active' : ''}`} aria-label="Questions" aria-hidden={stage !== LAST_STAGE} inert={stage !== LAST_STAGE}>
         <h2>Questions?</h2>
         <p className="questions-presenters">Saranath P &amp; Srividhya Sethuraman</p>
         <p className="questions-paper">PARWiS · ICDM 2021</p>
       </section>
-      <div className="presentation-page-number" aria-label={`Slide ${slideNumber} of 14`}>{slideNumber} / 14</div>
+      <div className="presentation-page-number" aria-label={`Slide ${slideNumber} of 15`}>{slideNumber} / 15</div>
       <nav className="slide-controls" aria-label="Presentation navigation">
         <button onClick={previous} disabled={stage === 0} aria-label="Previous reveal or slide">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12 H5 M11 6 L5 12 L11 18" /></svg>
