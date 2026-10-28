@@ -1444,6 +1444,23 @@ p { margin: 0; }
 
 /* Reserve a separate closing row for the final RUCB reveal. */
 @media(min-width:651px) {
+ .markov-disruption-slide.markov-split { display:block; }
+ .markov-disruption-slide .markov-definition { position:absolute; width:52%; top:19%; left:50%; transform:translateX(-50%) scale(1); transform-origin:50% 0; transition:left 850ms cubic-bezier(.22,1,.36,1),transform 850ms cubic-bezier(.22,1,.36,1); }
+ .markov-disruption-slide.markov-split .markov-definition { left:25%; transform:translateX(-50%) scale(.78); }
+ .markov-disruption-slide .markov-flow { width:65%; max-height:90px; margin:8px auto; }
+ .markov-disruption-slide .markov-local-push { position:absolute; top:19%; left:75%; width:43%; transform:translateX(-50%); transition:opacity 400ms ease,visibility 400ms; }
+ .markov-disruption-slide .markov-local-push.visible { transition-delay:850ms; }
+ .markov-disruption-slide .markov-expected-score { position:absolute; bottom:95px; left:5%; right:5%; }
+}
+@media(max-height:760px) and (min-width:651px) {
+ .markov-disruption-slide .markov-definition,.markov-disruption-slide .markov-local-push { top:17%; }
+ .markov-disruption-slide .markov-flow { max-height:65px; }
+ .markov-disruption-slide.markov-split .markov-definition { transform:translateX(-50%) scale(.74); }
+}
+@media(prefers-reduced-motion:reduce) {
+ .markov-disruption-slide .markov-definition,.markov-disruption-slide .markov-local-push.visible { transition-duration:1ms; transition-delay:0ms; }
+}
+@media(min-width:651px) {
  .lecture-stage .knockout-panel.parked-left { left:23%; width:40%; }
  .lecture-stage .duelling-panel.visible { left:77%; width:40%; }
  .lecture-stage:has(.duelling-panel.visible) .algorithm-panel.visible { top:22%; transform:translate(-50%,0); }
