@@ -1463,6 +1463,21 @@ p { margin: 0; }
 
 /* Reserve a separate closing row for the final RUCB reveal. */
 @media(min-width:651px) {
+ .comparison-story .challenger-option h3 { margin-bottom:12px; }
+ .comparison-story .challenger-option > .challenger-paper-title { font-size:32px; margin-top:7px; }
+ .comparison-story .challenger-paper-details { font-size:20px; line-height:1.2; margin-top:7px; }
+ .comparison-story .challenger-paper-details p + p { font-size:17px; }
+ .comparison-story .challenger-question { bottom:16%; }
+ .comparison-story .challenger-answer { bottom:7%; }
+}
+@media(max-height:760px) and (min-width:651px) {
+ .comparison-story .challenger-paper-details { font-size:18px; }
+ .comparison-story .challenger-paper-details p + p { font-size:15px; }
+ .comparison-story .challenger-option > .challenger-paper-title { font-size:28px; }
+ .comparison-story .challenger-question { font-size:clamp(28px,2.6vw,36px); }
+ .comparison-story .challenger-answer { font-size:clamp(26px,2.4vw,33px); }
+}
+@media(min-width:651px) {
  .markov-disruption-slide.markov-split { display:block; }
  .markov-disruption-slide .markov-definition { position:absolute; width:52%; top:19%; left:50%; transform:translateX(-50%) scale(1); transform-origin:50% 0; transition:left 850ms cubic-bezier(.22,1,.36,1),transform 850ms cubic-bezier(.22,1,.36,1); }
  .markov-disruption-slide.markov-split .markov-definition { left:25%; transform:translateX(-50%) scale(.78); }
