@@ -1134,7 +1134,7 @@ p { margin: 0; }
 }
 @media(max-width:650px) { .rucb-recap-code { font-size:14.168px; }.rucb-recap-line { padding-left:18px; }.rucb-line-number { left:3px; }.rucb-matrix-heading { font-size:16.744px; }.rucb-upper-table { font-size:15.456px; }.rucb-upper-table th,.rucb-upper-table td { padding:3px; }.rucb-candidate-summary,.rucb-recap-message,.rucb-comparison-count { font-size:15.456px; }.rucb-better-line { font-size:25.76px; }.rucb-recap-source { font-size:10.304px; } }
 
-.guided-rucb .rucb-recap-line { opacity:.18; transition:opacity 500ms,background 500ms,font-size 600ms,padding 600ms; min-height:52px; }
+.guided-rucb .rucb-recap-line { opacity:.18; transition:opacity 200ms,background 200ms; min-height:52px; }
 .guided-rucb .rucb-recap-line.executing { opacity:1; font-size:clamp(33.488px,3.026vw,45.08px); padding-top:13px; padding-bottom:13px; }
 .guided-rucb .rucb-recap-line small { display:none; }
 .guided-rucb .rucb-recap-line.executing small { display:block; font-size:clamp(20.608px,1.674vw,25.76px); }

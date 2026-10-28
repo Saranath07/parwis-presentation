@@ -27,11 +27,12 @@ function ArmArena({phase}){
   {[...letters].map((label,i)=>{
    let x=65+i*122,y=phase===0?105:45;
    if(phase>=3+i){x=i<2?100+i*100:350+(i-2)*80;y=174;}
+   if(phase===7&&i===1){x=160;y=60;}
    if(challenge){x=i===1?160:i===3?370:i===0?55:455;y=i===1||i===3?82:165;}
    const rejected=phase>=3+i&&i>=2;
    return <g key={label} className="rucb-moving-arm" style={{transform:`translate(${x}px,${y}px)`,opacity:challenge&&i!==1&&i!==3?.2:rejected&&!challenge?.45:1}}>
     <circle r={phase===0?28:phase===7&&i===1?26:22} fill={colors[i]}/><text y="7" textAnchor="middle" fill="white" fontSize="26.4">{label}</text>
-    {challenge&&i===1&&<text y="52" textAnchor="middle" fontSize="19.8">Champion</text>}
+    {phase>=7&&i===1&&<text y={phase===7?-36:52} textAnchor="middle" fontSize="19.8">Champion</text>}
     {phase===8&&i===3&&<text y="52" textAnchor="middle" fontSize="19.8">Challenger</text>}
     {phase>=9&&i===3&&<><path d="M-18-45 L-11-37 L0-51 L11-37 L18-45 L14-29 H-14 Z" fill="#efc349" stroke="#8b6818"/><text y="52" textAnchor="middle" fontSize="19.8">Wins this draw</text></>}
    </g>;
@@ -49,7 +50,7 @@ export function RucbRecapSlide({active,step}){
   <>Choose champion <MathLine tex="c"/> from <MathLine tex={String.raw`\mathcal C,\mathcal H`}/><small>Empty <MathLine tex={String.raw`\mathcal C`}/>: choose uniformly from all arms.<br/>Singleton <MathLine tex={String.raw`\mathcal C`}/>: choose it; <MathLine tex={String.raw`\mathcal H\gets\mathcal C`}/>. <br/>Otherwise: <MathLine tex={String.raw`\mathcal H`}/> gets <MathLine tex={String.raw`\tfrac12`}/>; share the rest uniformly.<br/>Empty <MathLine tex={String.raw`\mathcal H`}/>: uniform over <MathLine tex={String.raw`\mathcal C`}/>.</small></>,
   <><MathLine tex={String.raw`d\gets\arg\max_j U_{jc}`}/><small>Use the champion’s column. Random ties; exclude <MathLine tex="c"/> from a tie.</small></>,
   <>Compare <MathLine tex="(c,d)"/> and update <MathLine tex="W"/>.</>,
-  <>Repeat until <MathLine tex="T"/>; report the empirical winner.<small>The arm beating the most opponents in the observed win fractions.</small></>,
+  <>Repeat until <MathLine tex="T"/>; report the winner.<small>The arm beating the most opponents in the observed win fractions.</small></>,
  ];
  return <section className={`slide story-slide rucb-recap-slide guided-rucb ${active?'active':''}`} aria-label="Published RUCB algorithm recap" data-step={step} aria-hidden={!active} inert={!active}>
   <h2>RUCB: optimistically test a champion</h2>
