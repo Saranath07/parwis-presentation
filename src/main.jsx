@@ -155,6 +155,7 @@ function DuellingVisual({playing}) {
     <figure className="algorithm-figure" data-tick={tick} data-phase={phase}>
       <figcaption>Duelling bandits (RUCB)</figcaption>
       <svg viewBox="0 0 500 440" role="img" aria-label={`Illustrative RUCB round ${record.round}. ${phases[phase]}. Champion ${'ABCD'[record.champion]}, challenger ${'ABCD'[record.challenger]}.`}>
+        <g transform="translate(0,-20)">
         <g className="duel-edges"><path d="M130 80 H370 V210 H130 Z M370 80 L130 210 M130 80 L370 210" /></g>
         {phase >= 1 && <line x1={c[0]} y1={c[1]} x2={d[0]} y2={d[1]} stroke="#000" strokeWidth="2.5" />}
         <circle cx={c[0]} cy={c[1]} r="27" className="active-item-ring" />
@@ -162,6 +163,7 @@ function DuellingVisual({playing}) {
         {positions.map(([x,y], index) => <ItemNode key={index} x={x} y={y} index={index} />)}
         <text x={c[0]} y={c[1]-38} textAnchor="middle" fontSize="19.8">Champion</text>
         {phase >= 1 && <text x={d[0]} y={d[1]+45} textAnchor="middle" fontSize="19.8">Challenger</text>}
+        </g>
         <text x="250" y="300" textAnchor="middle" className="match-status">{phases[phase]}</text>
         {phase === 2 ? <text x="250" y="342" textAnchor="middle" fontSize="27.5" fill={itemColors[record.winner]}>{'ABCD'[record.winner]} wins</text> : <text x="250" y="342" textAnchor="middle" fontSize="25.3">{phase === 0 ? `Champion: ${'ABCD'[record.champion]}` : `${'ABCD'[record.champion]} vs ${'ABCD'[record.challenger]}　 N = ${current.n}${phase === 3 ? '  ↑' : ''}`}</text>}
         <text x="250" y="380" textAnchor="middle" fontSize="19.8">{phase === 3 ? `Empirical win fraction: ${(current.wins / Math.max(1, current.n)).toFixed(2)}` : `Round ${record.round}`}</text>
@@ -275,8 +277,8 @@ function ModellingSlide({active, step: reveal, bridgeOnly = false}) {
 function App() {
   const [stage, setStage] = useState(0);
   const slideNumber = stage === 0 ? 1 : stage <= 11 ? 2 : stage <= 23 ? 3 : stage <= 27 ? 4 : stage <= 32 ? 5 : stage <= 36 ? 6 : stage <= 39 ? 7 : stage < MARKOV_START ? 8 : stage < CHESS_START ? 9 : stage < ALGORITHM_START ? 10 : stage < NETFLIX_START ? 11 : stage < RESULTS_START ? 12 : stage < LAST_STAGE ? 13 : 14;
-  const next = () => setStage(value => value === 0 ? 4 : value === 25 ? 27 : Math.min(LAST_STAGE, value + 1));
-  const previous = () => setStage(value => value <= 4 ? 0 : value === 27 ? 25 : value - 1);
+  const next = () => setStage(value => value === 0 ? 4 : value === 10 ? 12 : value === 25 ? 27 : Math.min(LAST_STAGE, value + 1));
+  const previous = () => setStage(value => value <= 4 ? 0 : value === 12 ? 10 : value === 27 ? 25 : value - 1);
 
   useEffect(() => {
     async function handleKeyDown(event) {
@@ -286,10 +288,10 @@ function App() {
 
       if (['ArrowRight', ' '].includes(event.key)) {
         event.preventDefault();
-        setStage(value => value === 0 ? 4 : value === 25 ? 27 : Math.min(LAST_STAGE, value + 1));
+        setStage(value => value === 0 ? 4 : value === 10 ? 12 : value === 25 ? 27 : Math.min(LAST_STAGE, value + 1));
       } else if (event.key === 'ArrowLeft') {
         event.preventDefault();
-        setStage(value => value <= 4 ? 0 : value === 27 ? 25 : value - 1);
+        setStage(value => value <= 4 ? 0 : value === 12 ? 10 : value === 27 ? 25 : value - 1);
       } else if (event.key.toLowerCase() === 'f' && !event.repeat) {
         event.preventDefault();
         try {
