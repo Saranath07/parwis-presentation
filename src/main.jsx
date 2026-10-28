@@ -10,6 +10,7 @@ import {AlgorithmSlide} from './AlgorithmSlide.jsx';
 import {DisruptionMeasuresSlide} from './DisruptionMeasuresSlide.jsx';
 import {MarkovDisruptionSlide} from './MarkovDisruptionSlide.jsx';
 import {NetflixSlide} from './NetflixSlide.jsx';
+import {retroNetflixPaths} from './retroNetflixPaths.js';
 import {RucbRecapSlide} from './RucbRecapSlide.jsx';
 import {walkthroughFrames} from './parwisWalkthrough.js';
 const MEASURES_START = 40;
@@ -50,8 +51,8 @@ function OpeningSlide({active}) {
 function NetflixIntro({active}) {
   return <section className={`slide netflix-intro-slide ${active?'active':''}`} aria-label="Vintage Netflix introduction" aria-hidden={!active} inert={!active}>
     {active&&<svg className="netflix-intro-animation" viewBox="0 0 900 360" role="img" aria-label="A large red N moves into place as the red Netflix wordmark forms">
-      <g className="netflix-forming-n"><text x="0" y="0" textAnchor="middle">N</text></g>
-      {[...'ETFLIX'].map((letter,index)=><g key={index} className="netflix-forming-letter" style={{'--letter-delay':`${index*65}ms`}}><text x={210+index*120} y="235" textAnchor="middle">{letter}</text></g>)}
+      <g className="netflix-forming-n"><path d={retroNetflixPaths[0]} transform="translate(-177.7 269) scale(2 -2)" /></g>
+      {retroNetflixPaths.slice(1).map((path,index)=><g key={index} className="netflix-forming-letter" style={{'--letter-delay':`${index*65}ms`}}><path d={path} transform="translate(-98 449) scale(2 -2)" /></g>)}
     </svg>}
   </section>;
 }
