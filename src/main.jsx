@@ -49,10 +49,10 @@ function OpeningSlide({active}) {
 
 function NetflixIntro({active}) {
   return <section className={`slide netflix-intro-slide ${active?'active':''}`} aria-label="Vintage Netflix introduction" aria-hidden={!active} inert={!active}>
-    {active&&<div className="netflix-intro-animation">
-      <span className="netflix-intro-n" aria-hidden="true">N</span>
-      <img className="netflix-intro-wordmark" src={`${import.meta.env.BASE_URL}netflix/netflix-2001.svg`} alt="Netflix" />
-    </div>}
+    {active&&<svg className="netflix-intro-animation" viewBox="0 0 900 360" role="img" aria-label="A large red N moves into place as the red Netflix wordmark forms">
+      <g className="netflix-forming-n"><text x="0" y="0" textAnchor="middle">N</text></g>
+      {[...'ETFLIX'].map((letter,index)=><g key={index} className="netflix-forming-letter" style={{'--letter-delay':`${index*65}ms`}}><text x={210+index*120} y="235" textAnchor="middle">{letter}</text></g>)}
+    </svg>}
   </section>;
 }
 
