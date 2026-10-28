@@ -51,15 +51,15 @@ export function ChessSelectionSlide({active, step}) {
     <h2>Who should play next?</h2>
     <p className="story-subtitle">Rough ratings. Previous games. Six possible pairs.</p>
     <div className="chess-selection-layout">
-      <svg className="chess-players" viewBox="0 0 560 540" role="img" aria-label={chosen?`The highest-scoring pair, ${selectedChessPair.key}, is selected to play next.`:'Illustrated Magnus Carlsen, Garry Kasparov, Vishy Anand, and fictional Beth Harmon, with hypothetical ratings.'}>
+      <svg className="chess-players" viewBox="0 0 560 560" role="img" aria-label={chosen?`The highest-scoring pair, ${selectedChessPair.key}, is selected to play next.`:'Illustrated Magnus Carlsen, Garry Kasparov, Vishy Anand, and fictional Beth Harmon, with hypothetical ratings.'}>
         {chessPlayers.map((player,index)=>{
           const selected=index===selectedChessPair.i||index===selectedChessPair.j;
           const destination=index===selectedChessPair.i?[120,215]:[440,215];
           const [x,y]=playing&&selected?destination:positions[index];
           return <g key={player.name} className={`chess-player ${selected?'selected-player':'other-player'}`} style={{transform:`translate(${x}px,${y}px)`}}>
             <SeatedPlayer color={player.color} portrait={index} pleased={chosen&&selected} facingLeft={playing&&selected?index===selectedChessPair.j:index%2===1} />
-            <text x="0" y="151" textAnchor="middle" fontSize="25.3">{player.name}</text>
-            <text x="0" y="179" textAnchor="middle" fontSize="24.2" fill="#555">{player.rating}</text>
+            <text x="0" y="170" textAnchor="middle" fontSize="25.3">{player.name}</text>
+            <text x="0" y="198" textAnchor="middle" fontSize="24.2" fill="#555">{player.rating}</text>
           </g>;
         })}
         <SmallChessboard className="first-game-board" y={playing?195:130} />
