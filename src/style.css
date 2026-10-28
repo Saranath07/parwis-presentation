@@ -1109,6 +1109,9 @@ p { margin: 0; }
 .netflix-intro-slide { background:#fffdf8; display:flex; align-items:center; justify-content:center; }
 .netflix-intro-animation { width:min(1000px,78vw); height:auto; max-height:55vh; overflow:visible; }
 .netflix-intro-animation path { fill:#b50910; }
+.netflix-intro-animation .netflix-letter-depth path { fill:#65070d; }
+.netflix-intro-animation .netflix-letter-face { fill:url(#retro-netflix-face); stroke:#ef4550; stroke-width:.25; stroke-linejoin:round; }
+.netflix-intro-animation { filter:drop-shadow(0 12px 8px rgba(80,20,10,.12)); }
 .netflix-forming-n { animation:retro-netflix-form-n 2400ms cubic-bezier(.22,1,.36,1) both; }
 .netflix-forming-letter { animation:retro-netflix-form-letter 2400ms cubic-bezier(.22,1,.36,1) both; animation-delay:var(--letter-delay); }
 @keyframes retro-netflix-form-n { 0% { opacity:0; transform:translate(450px,180px) scale(1.6); } 15%,35% { opacity:1; transform:translate(450px,180px) scale(1.9); } 78%,100% { opacity:1; transform:translate(80px,180px) scale(1); } }

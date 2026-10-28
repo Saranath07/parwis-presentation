@@ -48,11 +48,18 @@ function OpeningSlide({active}) {
   );
 }
 
+function RetroNetflixLetter({path,transform}) {
+  return <>
+    {Array.from({length:10},(_,index)=>10-index).map(depth=><g key={depth} className="netflix-letter-depth" transform={`translate(${depth*1.1} ${depth*1.3})`}><path d={path} transform={transform}/></g>)}
+    <path className="netflix-letter-face" d={path} transform={transform}/>
+  </>;
+}
 function NetflixIntro({active}) {
   return <section className={`slide netflix-intro-slide ${active?'active':''}`} aria-label="Vintage Netflix introduction" aria-hidden={!active} inert={!active}>
     {active&&<svg className="netflix-intro-animation" viewBox="0 0 900 360" role="img" aria-label="A large red N moves into place as the red Netflix wordmark forms">
-      <g className="netflix-forming-n"><path d={retroNetflixPaths[0]} transform="translate(-177.7 269) scale(2 -2)" /></g>
-      {retroNetflixPaths.slice(1).map((path,index)=><g key={index} className="netflix-forming-letter" style={{'--letter-delay':`${index*65}ms`}}><path d={path} transform="translate(-98 449) scale(2 -2)" /></g>)}
+      <defs><linearGradient id="retro-netflix-face" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stopColor="#ed2836"/><stop offset=".45" stopColor="#cc101d"/><stop offset="1" stopColor="#aa0611"/></linearGradient></defs>
+      <g className="netflix-forming-n"><RetroNetflixLetter path={retroNetflixPaths[0]} transform="translate(-177.7 269) scale(2 -2)" /></g>
+      {retroNetflixPaths.slice(1).map((path,index)=><g key={index} className="netflix-forming-letter" style={{'--letter-delay':`${index*65}ms`}}><RetroNetflixLetter path={path} transform="translate(-98 449) scale(2 -2)" /></g>)}
     </svg>}
   </section>;
 }
