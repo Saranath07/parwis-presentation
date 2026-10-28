@@ -15,7 +15,7 @@ export function ExperimentsSlide({active,step}){
   <h2>{intro?'Experiments: synthetic and real data':step===1?'Which disruption measure works best?':step===2?'Does PARWiS recover the winner more often?':'How good is the reported ranking?'}</h2>
   <div className="experiment-content" key={step}>
    {intro?<>
-    <div className="experiment-dataset-cards">{datasets.map(d=><article key={d.key}><DatasetIcon type={d.type}/><h3>{d.name}</h3><p>{d.detail}</p>{d.key==='synthetic'?<div className="synthetic-setup"><MathText tex={String.raw`w_\star=100,\quad w_i\sim U[0,75]`}/><small>Also tested: n = 10 and 50 · 10 independent runs</small></div>:<p className="dataset-pipeline">{d.key==='jester'?'Joke ratings':'Movie ratings'} → pairwise probabilities<br/>→ fitted BTL scores → comparisons</p>}</article>)}</div>
+    <div className="experiment-dataset-cards">{datasets.map(d=><article key={d.key}><DatasetIcon type={d.type}/><h3>{d.name}</h3><p>{d.detail}</p>{d.key==='synthetic'?<div className="synthetic-setup"><MathText tex={String.raw`\pi_\star=100,\quad \pi_i\sim U[0,75]`}/><small>Also tested: n = 10 and 50 · 10 independent runs</small></div>:<p className="dataset-pipeline">{d.key==='jester'?'Joke ratings':'Movie ratings'} → pairwise probabilities<br/>→ fitted BTL scores → comparisons</p>}</article>)}</div>
     <p className="experiment-other-data">Also evaluated: <strong>Sushi-A · Sushi-B · MovieLens</strong> <span>Appendix figures</span></p>
     <div className="experiment-metric-intro"><span><strong>Recovery fraction ↑</strong>Find the actual winner</span><span><strong>True rank of reported winner ↓</strong>How good is our answer?</span><span><strong>Reported rank of true winner ↓</strong>Where did the winner end up?</span></div>
    </>:quality?<>

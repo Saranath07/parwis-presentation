@@ -209,7 +209,7 @@ function BTLAnimation({playing}) {
           <div xmlns="http://www.w3.org/1999/xhtml" style={{textAlign:'center',fontSize:'20px'}} dangerouslySetInnerHTML={{__html:katex.renderToString(String.raw`\theta_i-\theta_j=${difference.toFixed(2)}\qquad p_{ij}=${probability.toFixed(2)}`,{throwOnError:true})}} />
         </foreignObject>
       </svg>
-      <Equation className="sigmoid-equation" tex={String.raw`p_{ij}=\sigma(\theta_i-\theta_j),\qquad\theta_i=\log w_i`} />
+      <Equation className="sigmoid-equation" tex={String.raw`p_{ij}=\sigma(\theta_i-\theta_j),\qquad\theta_i=\log \pi_i`} />
     </>
   );
 }
@@ -252,7 +252,7 @@ function ModellingSlide({active, step: reveal, bridgeOnly = false}) {
         <SetupVisuals reveal={reveal} />
         {reveal<=2&&<div className={`btl-block ${reveal<1?'setup-btl-hidden':''} ${step >= 1 ? 'at-top' : ''}`} aria-hidden={reveal<1||step >= 7}>
           <h3>BTL assumption</h3>
-          <Equation tex={String.raw`p_{ij}=\Pr(i\succ j)=\frac{w_i}{w_i+w_j}`} />
+          <Equation tex={String.raw`p_{ij}=\Pr(i\succ j)=\frac{\pi_i}{\pi_i+\pi_j}`} />
           <div className={`btl-animation-wrapper ${step >= 1 ? 'disappeared' : ''}`} aria-hidden={step >= 1}>
             <BTLAnimation playing={active && (reveal === 1 || reveal === 2)} />
           </div>
